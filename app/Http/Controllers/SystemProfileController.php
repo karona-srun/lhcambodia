@@ -85,6 +85,8 @@ class SystemProfileController extends Controller
         $profile->address = $request->address;
         $profile->descrip_contract_invoice = $request->descrip_contract_invoice;
         $profile->descrip_contract_quote = $request->descrip_contract_quote;
+        $profile->introduct = $request->introduct;
+        $profile->introduct_km = $request->introduct_km;
         $profile->save();
 
         return redirect()->route('system-profile.index')->with('success', __('app.settings').__('app.label_updated_successfully'));

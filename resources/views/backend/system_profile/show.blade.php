@@ -13,15 +13,15 @@
                         <h3 class="card-title">{{ __('app.settings') }}</h3>
                         <div class="card-tools">
                             @can('System Profile Create')
-                                <button type="submit" class="btn rimary btn-save"> <i
+                                <button type="submit" class="btn btn-primary btn-save"> <i
                                         class=" fas fa-save"></i>
                                     {{ __('app.btn_save') }}</button>
                             @endcan
                             @can('System Profile Edit')
-                                <a href="#" class="btn arning btn-edit"> <i
+                                <a href="#" class="btn btn-warning btn-edit"> <i
                                         class=" fas fa-edit"></i>
                                     {{ __('app.btn_edit') }}</a>
-                                <a href="#" class="btn anger btn-cancel"> 
+                                <a href="#" class="btn btn-danger btn-cancel"> 
                                     <i class="far fa-times-circle"></i>
                                     {{ __('app.btn_cancel') }}</a>
                             @endcan
@@ -38,7 +38,7 @@
                                     <input type="file" name="photo" id="imgInp" accept="image/*"
                                         class="btn ile mt-2 imgInp" style="display: none">
                                     <button type="button"
-                                        class="btn utline-primary mt-2 blah">{{ __('app.btn_browser') }}</button>
+                                        class="btn btn-outline-primary mt-2 blah">{{ __('app.btn_browser') }}</button>
                                 </div>
                             </div>
                             <div class="col-md-9">
@@ -89,6 +89,26 @@
                                             <label>{{ __('app.label_term_and_conditions_quote') }} {{__('app.label_quote')}}</label>
                                             <textarea id="summernote_quote" name="descrip_contract_quote">
                                                 {{ $profile->descrip_contract_quote }}
+                                            </textarea>                                
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>{{__('app.label_introduct')}}</label>
+                                            <textarea id="summernote" class="summernote" name="introduct">
+                                                {{ $profile->introduct }}
+                                            </textarea>                                
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>{{__('app.label_introduct_km')}}</label>
+                                            <textarea id="summernote" class="summernote" name="introduct_km">
+                                                {{ $profile->introduct_km }}
                                             </textarea>                                
                                         </div>
                                     </div>

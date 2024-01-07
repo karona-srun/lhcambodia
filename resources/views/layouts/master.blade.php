@@ -235,6 +235,56 @@
                                 </a>
                             </li>
                         @endcan
+                        <li
+                            class="nav-item {{ Request::is('users*') || Request::is('roles*') ? 'menu-is-opening menu-open' : null }} ">
+                            <a href="#"
+                                class="nav-link {{ Request::is('users*') || Request::is('roles*') ? 'active' : null }} ">
+                                <i class="nav-icon far fa-newspaper"></i>
+                                <p>
+                                    {{ __('app.content_page')}}
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('faqs') }}"
+                                        class="nav-link {{ Request::is('faqs*') ? 'active' : null }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        {{ __('app.faq_page')}}
+                                    </a>
+                                </li>
+                                @can('About List')
+                                <li class="nav-item">
+                                    <a href="{{ url('abouts') }}"
+                                        class="nav-link {{ Request::is('abouts*') ? 'active' : null }} ">
+                                        <i class="fas fa-newspaper nav-icon"></i>
+                                        <p>{{ __('app.about_us_page') }}</p>
+                                    </a>
+                                </li>
+                            @endcan
+                                <li class="nav-item">
+                                    <a href="{{ url('contacts') }}"
+                                        class="nav-link {{ Request::is('roles*') ? 'active' : null }}">
+                                        <i class="fas fa-phone-volume nav-icon"></i>
+                                        <p>{{ __('app.label_contact')}}</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('slideshow') }}"
+                                        class="nav-link {{ Request::is('roles*') ? 'active' : null }}">
+                                        <i class="fas fa-images nav-icon"></i>
+                                        <p>{{__('app.slideshow')}}</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('roles.index') }}"
+                                        class="nav-link {{ Request::is('roles*') ? 'active' : null }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pages</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         @can('Customer List')
                             <li class="nav-item">
                                 <a href="{{ url('customers') }}"
@@ -460,54 +510,6 @@
                                 </ul>
                             </li>
                         @endif
-                        <li
-                            class="nav-item {{ Request::is('users*') || Request::is('roles*') ? 'menu-is-opening menu-open' : null }} ">
-                            <a href="#"
-                                class="nav-link {{ Request::is('users*') || Request::is('roles*') ? 'active' : null }} ">
-                                <i class="nav-icon far fa-newspaper"></i>
-                                <p>
-                                    Main Page
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('users.index') }}"
-                                        class="nav-link {{ Request::is('users*') ? 'active' : null }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Pages</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('roles.index') }}"
-                                        class="nav-link {{ Request::is('roles*') ? 'active' : null }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Pages</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('roles.index') }}"
-                                        class="nav-link {{ Request::is('roles*') ? 'active' : null }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Pages</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('roles.index') }}"
-                                        class="nav-link {{ Request::is('roles*') ? 'active' : null }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Pages</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('roles.index') }}"
-                                        class="nav-link {{ Request::is('roles*') ? 'active' : null }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Pages</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
                         @if (Auth::user()->can('Revenue List') || Auth::user()->can('Expend List'))
                             <li
                                 class="nav-item {{ Request::is('revenue*') || Request::is('expends*') ? 'menu-is-opening menu-open' : null }} ">
@@ -577,10 +579,9 @@
                         @if (Auth::user()->can('Option Income List') ||
                                 Auth::user()->can('Option Expend List') ||
                                 Auth::user()->can('Time List') ||
-                                Auth::user()->can('About List') ||
                                 Auth::user()->can('System Profile List'))
                             <li
-                                class="nav-item {{ Request::is('income-options*') || Request::is('expend-options*') || Request::is('times*') || Request::is('system-profile*') || Request::is('abouts*') ? 'menu-is-opening menu-open' : null }} ">
+                                class="nav-item {{ Request::is('income-options*') || Request::is('expend-options*') || Request::is('times*') || Request::is('system-profile*') ? 'menu-is-opening menu-open' : null }} ">
                                 <a href="#"
                                     class="nav-link {{ Request::is('income-options*') || Request::is('expend-options*') || Request::is('times*') || Request::is('system-profile*') ? 'active' : null }} ">
                                     <i class="nav-icon fas fa-cogs"></i>
@@ -623,15 +624,6 @@
                                                 class="nav-link {{ Request::is('times*') ? 'active' : null }} ">
                                                 <i class="far fa-clock nav-icon"></i>
                                                 <p>{{ __('app.time') }}</p>
-                                            </a>
-                                        </li>
-                                    @endcan
-                                    @can('About List')
-                                        <li class="nav-item">
-                                            <a href="{{ url('abouts') }}"
-                                                class="nav-link {{ Request::is('abouts*') ? 'active' : null }} ">
-                                                <i class="fas fa-newspaper nav-icon"></i>
-                                                <p>{{ __('app.label_content') }}</p>
                                             </a>
                                         </li>
                                     @endcan
@@ -718,6 +710,8 @@
                 theme: 'bootstrap4',
                 minimumResultsForSearch: Infinity,
             });
+
+            $('.summernote').summernote();
 
             $('#sub_datatable').DataTable({
                 "paging": false,

@@ -19,9 +19,9 @@
                     <form id="customerForm" action="{{ url('/abouts') }}" method="post" >
                         @csrf
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6 mb-2">
                                 <div class="form-group">
-                                    <label>{{ __('app.label_name') }} <small
+                                    <label>{{ __('app.about_title_km') }} <small
                                             class="text-red">*</small></label>
                                     <input type="text" name="name" class="form-control" value="{{ old('customer_name') }}"
                                         placeholder="{{ __('app.label_name') }}" value="{{ old('name') }}">
@@ -31,12 +31,35 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="col-sm-6 mb-2">
+                                <div class="form-group">
+                                    <label>{{ __('app.about_title_en') }} <small
+                                            class="text-red">*</small></label>
+                                    <input type="text" name="name_en" class="form-control" value="{{ old('customer_name') }}"
+                                        placeholder="{{ __('app.label_name') }}" value="{{ old('name') }}">
+                                    @if ($errors->has('name'))
+                                        <div class="error text-danger text-sm mt-1">
+                                            {{ $errors->first('name') }}</div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6 mb-2">
                                 <div class="form-group">
-                                    <label>{{ __('app.label_content') }} <small class="text-red">*</small></label>
+                                    <label>{{ __('app.about_content_km') }} <small class="text-red">*</small></label>
                                     <textarea name="content" class="form-control summernote" rows="3"
+                                        placeholder="{{ __('app.label_required') }}{{ __('app.label_content') }}">{{ old('content') }}</textarea>
+                                    @if ($errors->has('content'))
+                                        <div class="error text-danger text-sm mt-1">
+                                            {{ $errors->first('content') }}</div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-2">
+                                <div class="form-group">
+                                    <label>{{ __('app.about_content_en') }} <small class="text-red">*</small></label>
+                                    <textarea name="content_en" class="form-control summernote" rows="3"
                                         placeholder="{{ __('app.label_required') }}{{ __('app.label_content') }}">{{ old('content') }}</textarea>
                                     @if ($errors->has('content'))
                                         <div class="error text-danger text-sm mt-1">

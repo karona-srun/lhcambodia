@@ -148,7 +148,7 @@
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <div class="modal-header">
-                        <h5 class="modal-title text-bold">ផ្ទៀងផ្ទាត់</h5>
+                        <h5 class="modal-title text-bold">{{__('app.label_confirm')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

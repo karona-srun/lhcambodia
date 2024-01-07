@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,7 +17,7 @@ class AboutController extends Controller
      */
     public function index()
     {
-        $abouts = About::get();
+        $abouts = About::orderBy('id','desc')->get();
         return view('backend.abouts.index', compact('abouts'));
     }
 
@@ -41,9 +42,13 @@ class AboutController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'content' => 'required',
+            'name_en' => 'required',
+            'content_en' => 'required',
         ],[
-            'name.required' => __('app.label_name').__('app.required'),
-            'content.required' => __('app.label_content').__('app.required'),
+            'name.required' => __('app.about_title_km').__('app.required'),
+            'content.required' => __('app.about_content_km').__('app.required'),
+            'name_en.required' => __('app.about_title_en').__('app.required'),
+            'content_en.required' => __('app.about_content_en').__('app.required'),
         ]);
 
         if($validator->fails()) {
@@ -53,6 +58,10 @@ class AboutController extends Controller
         $about = new About();
         $about->name = $request->name;
         $about->content = $request->content;
+        $about->name_en = $request->name_en;
+        $about->content_en = $request->content_en;
+        $about->created_by = Auth::user()->id;
+        $about->updated_by = Auth::user()->id;
         $about->save();
 
         return redirect('/abouts')->with('success', __('app.label_content') . __('app.label_created_successfully'));
@@ -105,6 +114,9 @@ class AboutController extends Controller
         $about = About::find($id);
         $about->name = $request->name;
         $about->content = $request->content;
+        $about->name_en = $request->name_en;
+        $about->content_en = $request->content_en;
+        $about->updated_by = Auth::user()->id;
         $about->save();
 
         return redirect('/abouts')->with('success', __('app.label_content') . __('app.label_updated_successfully'));

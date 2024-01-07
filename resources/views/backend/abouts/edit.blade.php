@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
-@section('title-page', __('app.label_about'))
+@section('title-page', __('app.edit_about'))
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">{{ __('app.label_content') }}</h3>
+                    <h3 class="card-title">{{ __('app.edit_about') }}</h3>
                     <div class="card-tools">
                         @can('About List')
                         <a href="{{ route('abouts.index') }}" class="btn  btn-outline-primary"> <i class=" fas fa-list"></i>
@@ -20,9 +20,9 @@
                         @csrf
                         @method('PATCH')
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>{{ __('app.label_name') }} <small
+                                    <label>{{ __('app.about_title_km') }} <small
                                             class="text-red">*</small></label>
                                     <input type="text" name="name" class="form-control" value="{{ $about->name }}"
                                         placeholder="{{ __('app.label_name') }}">
@@ -32,9 +32,21 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{{ __('app.about_title_en') }} <small
+                                            class="text-red">*</small></label>
+                                    <input type="text" name="name_en" class="form-control" value="{{ $about->name_en }}"
+                                        placeholder="{{ __('app.label_name') }}">
+                                    @if ($errors->has('name_en'))
+                                        <div class="error text-danger text-sm mt-1">
+                                            {{ $errors->first('name') }}</div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>{{ __('app.label_content') }} <small class="text-red">*</small></label>
                                     <textarea name="content" class="form-control summernote" rows="3"
@@ -42,6 +54,17 @@
                                     @if ($errors->has('content'))
                                         <div class="error text-danger text-sm mt-1">
                                             {{ $errors->first('content') }}</div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{{ __('app.label_content') }} <small class="text-red">*</small></label>
+                                    <textarea name="content_en" class="form-control summernote" rows="3"
+                                        placeholder="{{ __('app.label_required') }}{{ __('app.label_content') }}">{{ $about->content_en }}</textarea>
+                                    @if ($errors->has('content_en'))
+                                        <div class="error text-danger text-sm mt-1">
+                                            {{ $errors->first('content_en') }}</div>
                                     @endif
                                 </div>
                             </div>

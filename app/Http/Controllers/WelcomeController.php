@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Attachment;
+use App\Models\FAQ;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Slideshow;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
@@ -15,7 +17,8 @@ class WelcomeController extends Controller
         $productes = Product::limit(15)->get();
         $producteRandom = Product::inRandomOrder()->limit(10)->get();
         $productCategory = ProductCategory::get();
-        return view('frontend.index', compact('productes','producteRandom','productCategory'));
+        $slide = Slideshow::where('status',0)->get();
+        return view('frontend.index', compact('productes','producteRandom','productCategory','slide'));
     }
 
     public function getProduct($id)
@@ -56,12 +59,21 @@ class WelcomeController extends Controller
 
     public function aboutUs()
     {
-        $abouts = About::get();
-        return view('frontend.about', compact('abouts'));
+        $data = ['about-us' => __('app.about_us_page')];
+        $abouts = About::orderBy('id','asc')->get();
+        return view('frontend.pages.about_us', compact('data','abouts'));
     }
 
     public function contactUs()
     {
-        return view('frontend.contact');
+        $data = ['contact-us' => __('app.about_us_page')];
+        return view('frontend.pages.contact_us.visit_us', compact('data'));
+    }
+
+    public  function faq()
+    {
+        $data = ['faq' => __('app.faq_page')];
+        $faqs = FAQ::orderBy('id','asc')->get();
+        return view('frontend.pages.faq', compact('data', 'faqs'));
     }
 }

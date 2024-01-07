@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">{{ __('app.label_list') }}{{ __('app.label_content') }}</h3>
+                    <h3 class="card-title">{{ __('app.about_list') }}</h3>
                     <div class="card-tools">
                         @can('About Create')
                         <a href="{{ route('abouts.create') }}" class="btn  btn-primary"> <i class=" fas fa-plus"></i>
@@ -20,8 +20,10 @@
                         <thead>
                             <tr>
                                 <th>{{ __('app.table_no') }}</th>
-                                <th>{{ __('app.label_name') }}</th>
-                                <th>{{ __('app.label_content') }}</th>
+                                <th>{{ __('app.about_title_km') }}</th>
+                                <th>{{ __('app.about_title_en') }}</th>
+                                <th>{{ __('app.about_content_km') }}</th>
+                                <th>{{ __('app.about_content_en') }}</th>
                                 <th>{{ __('app.table_action') }}</th>
                             </tr>
                         </thead>
@@ -30,7 +32,9 @@
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ $item->name_en }}</td>
                                     <td>{!! $item->content !!}</td>
+                                    <td>{!! $item->content_en !!}</td>
                                     <td>
                                         @can('About Edit')
                                         <a href="{{ route('abouts.edit',$item->id)}}" class="btn  btn-link"><i class="fas fa-eye"></i></a>
@@ -57,7 +61,7 @@
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <div class="modal-header">
-                        <h5 class="modal-title text-bold">ផ្ទៀងផ្ទាត់</h5>
+                        <h5 class="modal-title text-bold">{{__('app.label_confirm')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

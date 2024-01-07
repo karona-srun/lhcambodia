@@ -22,6 +22,8 @@ return new class extends Migration
             $table->longText('address');
             $table->longText('descrip_contract_invoice');
             $table->longText('descrip_contract_quote');
+            $table->longText('introduct');
+            $table->longText('introduct_km');
             $table->timestamps();
         });
     }

@@ -4,10 +4,12 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AddCartController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\BaseSalaryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ExpendController;
 use App\Http\Controllers\ExpendOptionsController;
+use App\Http\Controllers\FAQsController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\IncomeOptionsController;
 use App\Http\Controllers\ItemAdjustmentController;
@@ -24,6 +26,7 @@ use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SaleOrderController;
+use App\Http\Controllers\SlideshowController;
 use App\Http\Controllers\StaffInfoController;
 use App\Http\Controllers\SystemProfileController;
 use App\Http\Controllers\TimeController;
@@ -44,13 +47,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index']);
+Route::get('/faq', [App\Http\Controllers\WelcomeController::class,'faq']);
 Route::get('/about-us', [App\Http\Controllers\WelcomeController::class, 'aboutUs']);
 Route::get('/contact-us', [App\Http\Controllers\WelcomeController::class, 'contactUs']);
+Route::post('/contact-us', [App\Http\Controllers\ContactController::class, 'store']);
 Route::get('/search', [App\Http\Controllers\WelcomeController::class, 'search']);
 Route::get('/product-details/{id}', [App\Http\Controllers\WelcomeController::class, 'getProduct']);
 Route::get('/product-categories/{id}', [App\Http\Controllers\WelcomeController::class, 'getProductByCategory']);
 Route::get('/products-list', [App\Http\Controllers\WelcomeController::class, 'productList']);
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+
 
 Route::group(['prefix' => 'admin'], function () {
     Auth::routes(['register' => false]);
@@ -59,6 +65,13 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/dashboard-sale', [App\Http\Controllers\DashboardSaleController::class, 'index'])->name('dashboard-sale');
+
+    // FAQ Content
+    Route::resource('/faqs', FAQsController::class);
+    Route::resource('/abouts', AboutController::class);
+    Route::resource('/contacts', ContactController::class);
+    Route::resource('/slideshow', SlideshowController::class);
+    Route::get('/slideshows-toggle-status/{id}',[App\Http\Controllers\SlideshowController::class, 'toggleStatus']);
 
     Route::resource('/department', DepartmentController::class);
     Route::post('/update-department', [App\Http\Controllers\DepartmentController::class, 'updateDepartment']);
@@ -154,7 +167,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get(' users-exportexcel', [App\Http\Controllers\UserController::class, 'exportExcel']);
     Route::resource('roles', RolesController::class);
     Route::resource('system-profile', SystemProfileController::class);
-    Route::resource('abouts', AboutController::class);
     Route::resource('sales-order', SaleOrderController::class);
     Route::get('sales-order-download-file/{id}', [App\Http\Controllers\SaleOrderController::class, 'getDownload']);
     Route::get('/sales-order-exportexcel', [App\Http\Controllers\SaleOrderController::class, 'exportExcel']);
