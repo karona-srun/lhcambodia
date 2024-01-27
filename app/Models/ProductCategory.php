@@ -9,6 +9,21 @@ class ProductCategory extends Model
 {
     use HasFactory;
 
+    public function submenu() 
+    {
+        return $this->hasMany(ProductSubCategoory::class,'product_category_id');
+    }
+
+    public function product() 
+    {
+        return $this->hasMany(Product::class,'product_category_id');
+    }
+
+    public function subCategory() 
+    {
+        return $this->hasMany(ProductSubCategoory::class);
+    }
+
     public function creator()
     {
         return $this->belongsTo(User::class,'created_by');

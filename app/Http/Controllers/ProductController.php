@@ -124,6 +124,8 @@ class ProductController extends Controller
         $product->product_code = $request->code;
         $product->color_code = $request->color_code;
         $product->product_name = $request->name;
+        $product->product_name_km = $request->name_km;
+        $product->classify = $request->classify;
         $product->scale = $request->scale;
         $product->buying_price = $request->buying_price ?? 0;
         $product->salling_price = $request->salling_price ?? 0;
@@ -268,7 +270,9 @@ class ProductController extends Controller
         $product->product_code = $request->code;
         $product->color_code = $request->color_code;
         $product->product_name = $request->name;
+        $product->product_name_km = $request->name_km;
         $product->scale = $request->scale;
+        $product->classify = $request->classify;
         $product->buying_price = $request->buying_price;
         $product->salling_price = $request->salling_price;
         $product->buying_date = $request->buying_date;

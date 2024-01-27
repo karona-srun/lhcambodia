@@ -73,6 +73,14 @@ body {
   outline: 0 !important;
 }
 
+.w-15{
+  width: 170px !important;
+}
+
+.w-10{
+  width: 80px !important;
+}
+
 hr {
   box-sizing: content-box;
   height: 0;

@@ -25,6 +25,7 @@
                             <tr>
                                 <th>{{ __('app.table_no') }}</th>
                                 <th>{{ __('app.code') }}</th>
+                                <th>{{ __('app.table_photo') }}</th>
                                 <th>{{ __('app.label_name') }}</th>
                                 <th>{{ __('app.table_action') }}</th>
                             </tr>
@@ -34,7 +35,8 @@
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $item->code }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td> <img src="{{ url($item->photo == "" ? 'product_category/product_image.png' : 'product_category',$item->photo) }}" class=" img-thumbnail img-size-50" alt="" srcset=""> </td>
+                                    <td>. {{ $item->name_km }} <br>. {{ $item->name }}</td>
                                     <td>
                                         @can('Product Category List')
                                         <a href="{{ route('product-category.show',$item->id) }}" class="btn  btn-primary"><i

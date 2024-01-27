@@ -6,7 +6,7 @@
             <div class="content-header">
                 <div class="row">
                     <div class="col-sm-12 clear-pl">
-                        <h1 class="m-0">{{ __('app.about_us_page') }}</h1>
+                        <h1 class="m-0">{{ __('app.contact_us_page') }}</h1>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('/') }}"
                                     class="text-muted">{{ __('app.home_page') }}</a>
@@ -25,7 +25,7 @@
             </div>
         </div>
         <hr>
-        <div class="container mt-4">
+        <div class="container mt-4 pb-5">
             <div class="row bg-white p-4">
                 <div class="col-sm-6">
                     <h5>{{ __('app.label_company_information') }}</h5>
@@ -151,6 +151,12 @@
 
                         </form>
                     </div>
+                </div>
+                <div class="col-sm-12 clear-pl mt-4 m-2">
+                    <h5 class="m-0 mb-2">{{ __('app.visit_us_page') }}</h5>
+                    <div class="border p-1">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3909.090750245001!2d104.88372059999999!3d11.5453476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109510069a6b291%3A0xae330c7e42d0b3c0!2sLuxury%20Home!5e0!3m2!1skm!2skh!4v1705121194177!5m2!1skm!2skh" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
                 </div>
             </div>
         </div>

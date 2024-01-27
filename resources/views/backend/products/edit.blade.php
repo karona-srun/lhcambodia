@@ -41,12 +41,12 @@
                                             <div class="form-group">
                                                 <label>{{ __('app.product_category') }} <small
                                                         class="text-red">*</small></label>
-                                                <select class="form-control select2" name="product_category"
+                                                <select class="form-control select2Custom" name="product_category"
                                                     style="width: 100%;">
-                                                    <option value="">{{ __('app.table_choose') }}</option>
+                                                    <option value="" data-foo="-">{{ __('app.table_choose') }}</option>
                                                     @foreach ($product_category as $item)
-                                                        <option value="{{ $item->id }}" {{ $product->product_category_id == $item->id ? "selected" : "" }}>
-                                                            {{ $item->name }}</option>
+                                                        <option value="{{ $item->id }}" data-foo="{{ $item->code }}" {{ $product->product_category_id == $item->id ? "selected" : "" }}>
+                                                            {{ $item->name_km }} {{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
                                                 @if ($errors->has('product_category'))
@@ -59,11 +59,11 @@
                                             <div class="form-group">
                                                 <label>{{ __('app.product_sub_category') }} <small
                                                         class="text-red">*</small></label>
-                                                <select class="form-control select2" name="product_sub_category"
+                                                <select class="form-control select2Custom" name="product_sub_category"
                                                     style="width: 100%;">
-                                                    <option value="">{{ __('app.table_choose') }}</option>
+                                                    <option value="" data-foo="-">{{ __('app.table_choose') }}</option>
                                                     @foreach ($sub_category as $sub)
-                                                        <option value="{{ $sub->id }}" {{ $product->product_sub_category_id == $sub->id ? "selected" : "" }}>
+                                                        <option value="{{ $sub->id }}" data-foo="{{ $sub->code }}" {{ $product->product_sub_category_id == $sub->id ? "selected" : "" }}>
                                                             {{ $sub->name }}</option>
                                                     @endforeach
                                                 </select>
@@ -101,7 +101,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>{{ __('app.label_name') }}{{ __('app.product') }} <small
                                                         class="text-red">*</small></label>
@@ -114,9 +114,36 @@
                                                 @endif
                                             </div>
                                         </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>{{ __('app.label_name_km') }}<small
+                                                        class="text-red">*</small></label>
+                                                <input type="text" name="name_km" class="form-control"
+                                                        value="{{ $product->product_name_km }}"
+                                                    placeholder="{{ __('app.label_required') }}{{ __('app.label_name_km') }}">
+                                                @if ($errors->has('name_km'))
+                                                    <div class="error text-danger text-sm mt-1">
+                                                        {{ $errors->first('name_km') }}</div>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>{{ __('app.label_classify') }} <small
+                                                        class="text-red">*</small></label>
+                                                <select name="classify" id="" class="form-control select2s">
+                                                    <option value="product_in_store" {{ $product->classify == 'product_in_store' ? "selected" : "" }}>{{ __('app.label_product_in_store') }}</option>
+                                                    <option value="product_for_sale" {{ $product->classify == 'product_for_sale' ? "selected" : "" }}>{{ __('app.label_product_for_sale') }}</option>
+                                                </select>
+                                                @if ($errors->has('classify'))
+                                                    <div class="error text-danger text-sm mt-1">
+                                                        {{ $errors->first('classify') }}</div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>{{ __('app.label_scale') }} <small
                                                         class="text-red">*</small></label>
@@ -129,7 +156,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>{{ __('app.label_buying_price') }} <small
                                                         class="text-red">*</small></label>
@@ -148,7 +175,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>{{ __('app.label_salling_price') }} <small
                                                         class="text-red">*</small></label>
@@ -211,14 +238,14 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>{{ __('app.label_description') }}</label>
-                                                <textarea rows="3" name="description" class="form-control"
+                                                <textarea rows="3" name="description" class="form-control summernote"
                                                     placeholder="{{ __('app.label_required') }}{{ __('app.label_description') }}">{{ $product->description }}</textarea>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>{{ __('app.label_note') }}</label>
                                                 <textarea rows="3" name="note" class="form-control"

@@ -57,18 +57,29 @@ class ProductCategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'code' => 'required',
             'name' => 'required',
+            'name_km' => 'required',
         ], [
-            'code.required' => __('app.code') . __('app.product_category') . __('app.required'),
-            'name.required' => __('app.label_name') . __('app.product_category') . __('app.required'),
+            'code.required' => __('app.code') . __('app.required'),
+            'name.required' => __('app.product_category') . __('app.required'),
+            'name_km.required' => __('app.product_category_km') . __('app.required'),
         ]);
 
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
+        $imageName = 'product_image.png';
+        if ($request->hasFile('photo')) {
+            $imageName = 'product_category_' . time() . rand(1, 99999) . '.' . $request->photo->getClientOriginalExtension();
+            $imageName = str_replace(' ', '_', $imageName);
+            $request->photo->move(public_path('product_category'), $imageName);
+        }
+
         $productCategory = new ProductCategory();
         $productCategory->code = $request->code;
         $productCategory->name = $request->name;
+        $productCategory->photo = $imageName;
+        $productCategory->name_km= $request->name_km;
         $productCategory->note = $request->note;
         $productCategory->created_by = Auth::user()->id;
         $productCategory->updated_by = Auth::user()->id;
@@ -112,8 +123,10 @@ class ProductCategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'name_km' => 'required',
         ], [
-            'name.required' => __('app.label_name') . __('app.product_category') . __('app.required'),
+            'name.required' => __('app.product_category') . __('app.required'),
+            'name_km.required' => __('app.product_category_km') . __('app.required'),
         ]);
 
         if ($validator->fails()) {
@@ -121,8 +134,21 @@ class ProductCategoryController extends Controller
         }
 
         $productCategory = ProductCategory::find($id);
+
+        $imageName = 'product_image.png';
+        if ($request->hasFile('photo')) {
+            $imageName = 'product_category_' . time() . rand(1, 99999) . '.' . $request->photo->getClientOriginalExtension();
+            $imageName = str_replace(' ', '_', $imageName);
+            $request->photo->move(public_path('product_category'), $imageName);
+
+        }
+
+
+        $productCategory->photo = $imageName;
+
         $productCategory->code = $request->code;
         $productCategory->name = $request->name;
+        $productCategory->name_km= $request->name_km;
         $productCategory->note = $request->note;
         $productCategory->updated_by = Auth::user()->id;
         $productCategory->save();

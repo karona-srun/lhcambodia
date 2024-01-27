@@ -21,14 +21,14 @@
                         @csrf
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <div class="form-group">
                                     <label>{{ __('app.product_category') }} <small
                                             class="text-red">*</small></label>
-                                    <select name="product_category" id="product_category" class="select2 form-control">
-                                        <option value="">{{__('app.table_choose')}}</option>
+                                    <select name="product_category" id="product_category" class="select2Custom form-control">
+                                        <option value="" data-foo="-">{{__('app.table_choose')}}</option>
                                         @foreach ($category as $item)
-                                            <option value="{{$item->id}}">{{ $item->name }}</option>
+                                            <option value="{{$item->id}}" data-foo="{{$item->code}}">{{ $item->name_km }} {{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('product_category'))
@@ -37,7 +37,7 @@
                                     @endif
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <div class="form-group">
                                     <label>{{ __('app.code') }} <small
                                             class="text-red">*</small></label>
@@ -49,7 +49,7 @@
                                     @endif
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <div class="form-group">
                                     <label>{{ __('app.product_sub_category') }} <small
                                             class="text-red">*</small></label>
@@ -58,6 +58,18 @@
                                     @if ($errors->has('name'))
                                         <div class="error text-danger text-sm mt-1">
                                             {{ $errors->first('name') }}</div>
+                                    @endif
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                    <label>{{ __('app.product_sub_category_km') }} <small
+                                            class="text-red">*</small></label>
+                                    <input type="text" name="name_km" class="form-control" value="{{ old('name') }}"
+                                        placeholder="{{ __('app.label_required') }}{{ __('app.product_sub_category_km') }}">
+                                    @if ($errors->has('name_km'))
+                                        <div class="error text-danger text-sm mt-1">
+                                            {{ $errors->first('name_km') }}</div>
                                     @endif
                                     </div>
                                 </div>

@@ -20,7 +20,12 @@
         }
 
         html body {
-            font-family: "Hanuman" !important;
+            font-family: "Hanuman";
+        }
+
+        .style-lhc {
+            bottom: 0px;
+            border-bottom:  2px solid #f58f5a;
         }
 
         .nav-link:hover .dropdown-menu {
@@ -57,6 +62,7 @@
         }
 
         .nav-item:hover {
+            padding: 0 5px;
             border-bottom: 1.5px solid #f58f5a;
         }
 
@@ -79,6 +85,44 @@
 
         .clear-pr {
             padding-right: 0px !important;
+        }
+
+        .card-header-cus {
+            border-bottom: 1px solid transparent !important;
+        }
+
+        .breadcrumb-item a:hover{
+            color: #f58f5a !important;
+        }
+
+        a{
+            color: #f58f5a;
+        }
+
+        .modal-fullscreen {
+            width: 100vw;
+            max-width: none;
+            height: 100% !important;
+            margin: 0;
+        }
+
+        .box-shadow{
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+        }
+
+        .box-shadow:hover{
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+        }
+
+        .btn-more
+        {
+            margin-top: -10px;
+        }
+        .btn-lhc{
+            background-color: #f58f5a;
+        }
+        .text-color-lhc{
+            color: #f58f5a;
         }
     </style>
 </head>
@@ -103,7 +147,7 @@
                         </a>
                     </div>
                     <div class="col-sm-12 col-xl-4 col-md-4 d-flex justify-content-end align-items-center">
-                        <a class="btn btn-icon btn-outline-link" href="{{ url('/admin/login') }}"> <i
+                        <a class="btn btn-icon btn-lhc text-white btn-outline-link" href="{{ url('/admin/login') }}"> <i
                                 class="fas fa-sign-in-alt me-2"></i> {{ __('app.label_login') }}</a>
                         <div class="dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
@@ -134,12 +178,12 @@
             </header>
         </div>
 
-        <div class="content-wrapper pb-4">
-            <div class="content-header content-header-cus bg-white">
+        <div class="content-wrapper">
+            <div class="content-header content-header-cus bg-white border-bottom">
                 <div class="container">
                     {{-- <div class="row">
                         <div class="col-sm-12"> --}}
-                    <nav class="navbar navbar-cus navbar-expand-lg navbar-light  navbar-white rounded">
+                    <nav class="navbar navbar-cus navbar-expand-lg navbar-light rounded bg-white">
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -149,7 +193,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="{{ url('/') }}" class="nav-link">{{ __('app.home_page') }}</a>
+                                    <a href="{{ url('/') }}" class="nav-link"> <i class=" fas fa-home"></i> {{ __('app.home_page') }}</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <div class="row">
@@ -162,38 +206,45 @@
                                                 class="dropdown-menu border-0 shadow">
 
                                                 <div class="d-md-flex align-items-start justify-content-start">
-
+                                                    @foreach ($menu as $menu_item)
                                                     <div>
                                                         <div class="dropdown-header">
-                                                            <h6 class="dropdown-title">{{ __('app.wpc_decking_page') }}
-                                                            </h6>
+                                                            <h6 class="dropdown-title">{{ app()->getLocale() == 'en' ? $menu_item->name : $menu_item->name_km  }}</h6>
+                                                        </div>
+                                                        @foreach ($menu_item->submenu as $item)
+                                                            <a class="dropdown-item" href="{{ url('/decor-product/'.strtolower(str_replace(' ','-',$menu_item->name)).'/'.strtolower(str_replace(' ','-',$item->name)),$item->id) }}">{{ app()->getLocale() == 'en' ? $item->name : $item->name_km }}</a>
+                                                        @endforeach
+                                                    </div>
+                                                    @endforeach
+                                                    {{-- <div>
+                                                        <div class="dropdown-header">
+                                                            <h6 class="dropdown-title">{{ __('app.wpc_decking_page') }}</h6>
                                                         </div>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.wpc_decking') }}</a>
+                                                            href="{{ url('#/decor-product/wpc-decking/wpc-decking') }}">{{ __('app.wpc_decking') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.wpc_decking_tile') }}</a>
+                                                            href="{{ url('#/decor-product/wpc-decking/wpc-decking-tile') }}">{{ __('app.wpc_decking_tile') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.wpc_skirting') }}</a>
-                                                        <a class="dropdown-item" href="#">{{__('app.wpc_decking_accessories')}}</a>
+                                                            href="{{ url('#/decor-product/wpc-decking/wpc-skirting') }}">{{ __('app.wpc_skirting') }}</a>
+                                                        <a class="dropdown-item" href="{{ url('#/decor-product/wpc-decking/wpc-decking-accessories') }}">{{__('app.wpc_decking_accessories')}}</a>
                                                     </div>
-
                                                     <div>
                                                         <div class="dropdown-header">
                                                             <h6 class="dropdown-title">{{ __('app.wall_panel_page') }}
                                                             </h6>
                                                         </div>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.wpc_wall_cladding') }}</a>
+                                                            href="{{ url('#/decor-product/wall-panel/wpc-wall-cladding') }}">{{ __('app.wpc_wall_cladding') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.wpc_wall_panel') }}</a>
+                                                            href="{{ url('#/decor-product/wall-panel/wpc-wall-panel') }}">{{ __('app.wpc_wall_panel') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.pvc_wall_column') }}</a>
+                                                            href="{{ url('#/decor-product/wall-panel/pvc-wall-column') }}">{{ __('app.pvc_wall_column') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.pvc_wall_panel') }}</a>
+                                                            href="{{ url('#/decor-product/wall-panel/pvc-wall-panel') }}">{{ __('app.pvc_wall_panel') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.pvc_skirting') }}</a>
+                                                            href="{{ url('#/decor-product/wall-panel/pvc-skirting') }}">{{ __('app.pvc_skirting') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.wall_panel_accessories')}}</a>
+                                                            href="{{ url('#/decor-product/wall-panel/wall-panel-accessories') }}">{{ __('app.wall_panel_accessories')}}</a>
                                                     </div>
 
                                                     <div>
@@ -202,18 +253,19 @@
                                                             </h6>
                                                         </div>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.laminate_floor') }}</a>
+                                                            href="{{ url('#/decor-product/flooring/laminate-floor') }}">{{ __('app.laminate_floor') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.spc_floor') }}</a>
+                                                            href="{{ url('#/decor-product/flooring/spc-floor') }}">{{ __('app.spc_floor') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.lvt_floor') }}</a>
+                                                            href="{{ url('#/decor-product/flooring/lvt-floor') }}">{{ __('app.lvt_floor') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.dry_back_lvt_floor') }}</a>
+                                                            href="{{ url('#/decor-product/flooring/dry-back-lvt-floor') }}">{{ __('app.dry_back_lvt_floor') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.glue_dry_back_lvt_floor_2mm') }}</a>
+                                                            href="{{ url('#/decor-product/flooring/glue-dry-back-lvt-floor') }}">{{ __('app.glue_dry_back_lvt_floor_2mm') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.vinyl_floor') }}</a>
-                                                            <a class="dropdown-item" href="#">{{__('app.skirting_floor')}}</a>
+                                                            href="{{ url('#/decor-product/flooring/vinyl-floor') }}">{{ __('app.vinyl_floor') }}</a>
+                                                        <a class="dropdown-item" 
+                                                            href="{{ url('#/decor-product/flooring/skirting-floor') }}">{{__('app.skirting_floor')}}</a>
                                                     </div>
 
                                                     <div>
@@ -221,11 +273,11 @@
                                                             <h6 class="dropdown-title">{{ __('app.carpet') }}</h6>
                                                         </div>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.carpet_roll') }}</a>
+                                                            href="{{ url('#/decor-product/carpet/carpet-roll') }}">{{ __('app.carpet_roll') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.carpet_tile') }}</a>
+                                                            href="{{ url('#/decor-product/carpet/carpet-tile') }}">{{ __('app.carpet_tile') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.rug') }}</a>
+                                                            href="{{ url('#/decor-product/carpet/rug') }}">{{ __('app.rug') }}</a>
                                                     </div>
 
                                                     <div>
@@ -233,10 +285,10 @@
                                                             <h6 class="dropdown-title">{{ __('app.wallpaper') }}</h6>
                                                         </div>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.wallpaper_roll') }}</a>
+                                                            href="{{ url('#/decor-product/wallpaper/wallpaper-roll') }}">{{ __('app.wallpaper_roll') }}</a>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ __('app.wallpaper_3d') }}</a>
-                                                    </div>
+                                                            href="{{ url('#/decor-product/wallpaper/wallpaper-3d') }}">{{ __('app.wallpaper_3d') }}</a>
+                                                    </div> --}}
                                                 </div>
                                             </ul>
                                         </div>
@@ -275,7 +327,7 @@
                                         aria-haspopup="true" aria-expanded="false"
                                         class="nav-link dropdown-toggle">{{ __('app.our_project_page') }}</a>
                                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                        <li><a href="#"
+                                        <li><a href="{{ url('photo-gallery')}}"
                                                 class="dropdown-item">{{ __('app.photo_galleries_page') }}</a>
                                         </li>
                                     </ul>

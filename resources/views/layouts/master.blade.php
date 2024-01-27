@@ -236,9 +236,9 @@
                             </li>
                         @endcan
                         <li
-                            class="nav-item {{ Request::is('users*') || Request::is('roles*') ? 'menu-is-opening menu-open' : null }} ">
+                            class="nav-item {{ Request::is('faqs*') ? 'menu-is-opening menu-open' : null }} ">
                             <a href="#"
-                                class="nav-link {{ Request::is('users*') || Request::is('roles*') ? 'active' : null }} ">
+                                class="nav-link {{ Request::is('faqs*') ? 'active' : null }} ">
                                 <i class="nav-icon far fa-newspaper"></i>
                                 <p>
                                     {{ __('app.content_page')}}
@@ -264,23 +264,23 @@
                             @endcan
                                 <li class="nav-item">
                                     <a href="{{ url('contacts') }}"
-                                        class="nav-link {{ Request::is('roles*') ? 'active' : null }}">
+                                        class="nav-link {{ Request::is('contacts*') ? 'active' : null }}">
                                         <i class="fas fa-phone-volume nav-icon"></i>
                                         <p>{{ __('app.label_contact')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ url('slideshow') }}"
-                                        class="nav-link {{ Request::is('roles*') ? 'active' : null }}">
-                                        <i class="fas fa-images nav-icon"></i>
+                                        class="nav-link {{ Request::is('slideshow*') ? 'active' : null }}">
+                                        <i class="fas fa-image nav-icon"></i>
                                         <p>{{__('app.slideshow')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('roles.index') }}"
-                                        class="nav-link {{ Request::is('roles*') ? 'active' : null }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Pages</p>
+                                    <a href="{{ url('photo-galleries') }}"
+                                        class="nav-link {{ Request::is('photo-galleries*') ? 'active' : null }}">
+                                        <i class="fas fa-images nav-icon"></i>
+                                        <p>{{__('app.photo_galleries_page')}}</p>
                                     </a>
                                 </li>
                             </ul>
@@ -686,6 +686,20 @@
     <script type="text/javascript">
         $(function() {
 
+            $("body").on("click", ".btn-delete-file", function() {
+                $(this).parents(".hdtuto").remove();
+            });
+
+            imgInp.onchange = evt => {
+                const [file] = imgInp.files
+                if (file) {
+                    blah.src = URL.createObjectURL(file)
+                }
+            }
+
+            $('.blah').on('click', function() {
+                $('.imgInp').trigger('click');
+            });
             // form purchase order
             $('.customer').change(function(event) {
                 var address = $('option:selected', this).attr('data-customer-address');
@@ -704,7 +718,49 @@
 
             $('.select2').select2({
                 theme: 'bootstrap4',
+                selectOnBlur: true,
             });
+
+            $('.select2Custom').select2({
+                theme: 'bootstrap4',
+                selectOnBlur: true,
+                matcher: matchCustom,
+                templateResult: formatCustom
+            });
+
+
+            function stringMatch(term, candidate) {
+                return candidate && candidate.toLowerCase().indexOf(term.toLowerCase()) >= 0;
+            }
+
+            function matchCustom(params, data) {
+                // If there are no search terms, return all of the data
+                if ($.trim(params.term) === '') {
+                    return data;
+                }
+                // Do not display the item if there is no 'text' property
+                if (typeof data.text === 'undefined') {
+                    return null;
+                }
+                // Match text of option
+                if (stringMatch(params.term, data.text)) {
+                    return data;
+                }
+                // Match attribute "data-foo" of option
+                if (stringMatch(params.term, $(data.element).attr('data-foo'))) {
+                    return data;
+                }
+                // Return `null` if the term should not be displayed
+                return null;
+            }
+
+            function formatCustom(state) {
+                return $(
+                    '<div><div>' + state.text + '</div><div class="foo">'
+                        + $(state.element).attr('data-foo')
+                        + '</div></div>'
+                );
+            }
 
             $('.select2s').select2({
                 theme: 'bootstrap4',

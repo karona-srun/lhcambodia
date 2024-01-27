@@ -34,9 +34,9 @@
                             @foreach ($subCategory as $i => $item)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $item->productCategory->name ?? '' }}</td>
+                                    <td>. {{ $item->productCategory->name_km ?? '' }} <br>. {{ $item->productCategory->name ?? '' }}</td>
                                     <td>{{ $item->code }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td>. {{ $item->name_km }} <br>. {{ $item->name }}</td>
                                     <td>
                                         @can('Product Sub Category Create')
                                         <a href="{{ route('product-sub-category.show',$item->id) }}" class="btn  btn-primary"><i

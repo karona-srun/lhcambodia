@@ -18,7 +18,7 @@ class ProductSubCategooryController extends Controller
      */
     public function index()
     {
-        $subCategory = ProductSubCategoory::orderBy('name','desc')->get();
+        $subCategory = ProductSubCategoory::orderBy('code','desc')->get();
         return view('backend.product_sub_category.index', compact('subCategory'));
     }
 
@@ -45,10 +45,12 @@ class ProductSubCategooryController extends Controller
             'product_category' => 'required',
             'code' => 'required',
             'name' => 'required',
+            'name_km' => 'required',
         ],[
             'product_category.required' => __('app.product_category').__('app.required'),
             'code.required' => __('app.code').__('app.required'),
-            'name.required' => __('app.product_category').__('app.required')
+            'name.required' => __('app.product_category').__('app.required'),
+            'name_km.required' => __('app.product_category_km').__('app.required')
         ]);
 
         if($validator->fails()) {
@@ -59,6 +61,7 @@ class ProductSubCategooryController extends Controller
         $productSubCategoory->product_category_id = $request->product_category;
         $productSubCategoory->code = $request->code;
         $productSubCategoory->name = $request->name;
+        $productSubCategoory->name_km = $request->name_km;
         $productSubCategoory->note = $request->note;
         $productSubCategoory->created_by = Auth::user()->id;
         $productSubCategoory->updated_by = Auth::user()->id;
@@ -105,10 +108,12 @@ class ProductSubCategooryController extends Controller
             'product_category' => 'required',
             'code' => 'required',
             'name' => 'required',
+            'name_km' => 'required',
         ],[
             'product_category.required' => __('app.product_category').__('app.required'),
             'code.required' => __('app.code').__('app.required'),
-            'name.required' => __('app.product_category').__('app.required')
+            'name.required' => __('app.product_category').__('app.required'),
+            'name_km.required' => __('app.product_sub_category_km').__('app.required')
         ]);
 
         if($validator->fails()) {
@@ -119,6 +124,7 @@ class ProductSubCategooryController extends Controller
         $productSubCategoory->product_category_id = $request->product_category;
         $productSubCategoory->code = $request->code;
         $productSubCategoory->name = $request->name;
+        $productSubCategoory->name_km = $request->name_km;
         $productSubCategoory->note = $request->note;
         $productSubCategoory->created_by = Auth::user()->id;
         $productSubCategoory->updated_by = Auth::user()->id;

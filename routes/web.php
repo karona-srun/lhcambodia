@@ -17,6 +17,7 @@ use App\Http\Controllers\ItemCategoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ItemSubCategoryController;
 use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\PhotoGalleriesController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
@@ -47,6 +48,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index']);
+Route::get('/photo-gallery', [App\Http\Controllers\WelcomeController::class,'photoGallery'] );
+Route::get('/photo-gallery/details/{id}', [App\Http\Controllers\WelcomeController::class,'photoGalleryDetails'] );
 Route::get('/faq', [App\Http\Controllers\WelcomeController::class,'faq']);
 Route::get('/about-us', [App\Http\Controllers\WelcomeController::class, 'aboutUs']);
 Route::get('/contact-us', [App\Http\Controllers\WelcomeController::class, 'contactUs']);
@@ -56,7 +59,7 @@ Route::get('/product-details/{id}', [App\Http\Controllers\WelcomeController::cla
 Route::get('/product-categories/{id}', [App\Http\Controllers\WelcomeController::class, 'getProductByCategory']);
 Route::get('/products-list', [App\Http\Controllers\WelcomeController::class, 'productList']);
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
-
+Route::get('/decor-product/{slug1}/{slug2}/{id}',  [App\Http\Controllers\WelcomeController::class,'decorProductFilterCategory']);
 
 Route::group(['prefix' => 'admin'], function () {
     Auth::routes(['register' => false]);
@@ -72,6 +75,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/contacts', ContactController::class);
     Route::resource('/slideshow', SlideshowController::class);
     Route::get('/slideshows-toggle-status/{id}',[App\Http\Controllers\SlideshowController::class, 'toggleStatus']);
+    Route::resource('photo-galleries', PhotoGalleriesController::class);
+    Route::get('/photo-galleries-toggle-status/{id}',[App\Http\Controllers\PhotoGalleriesController::class, 'toggleStatus']);
 
     Route::resource('/department', DepartmentController::class);
     Route::post('/update-department', [App\Http\Controllers\DepartmentController::class, 'updateDepartment']);

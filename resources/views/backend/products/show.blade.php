@@ -66,8 +66,16 @@
                                     <td class=" text-break">: {{ $product->subCategory->name ?? 'N/A' }}</td>
                                 </tr>
                                 <tr>
+                                    <th>{{ __('app.label_name_km') }}</th>
+                                    <td class=" text-break">: {{ $product->product_name_km }}</td>
+                                </tr>
+                                <tr>
                                     <th>{{ __('app.label_name') }}</th>
                                     <td class=" text-break">: {{ $product->product_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ __('app.label_classify') }}</th>
+                                    <td class=" text-break">: {{ $product->classify == "product_for_sale" ? __('app.label_product_for_sale') : __('app.label_product_in_store') }}</td>
                                 </tr>
                                 <tr>
                                     <th>{{ __('app.label_scale') }}{{ __('app.product') }}</th>

@@ -3,7 +3,10 @@
 @section('content')
     <div class="col-md-10 col-sm-12">
         <div class="card-header text-center ">
-            <a href="{{ url('/') }}" class="h1"><b>{{$profile->name}}</b></a>
+            <div>
+                <img src="{{ url($profile->photo) }}" width="100px" alt="">
+            </div>
+        <a href="{{ url('/') }}" class="h1"><b>{{$profile->name}}</b></a>
         </div>
         <div class="card-body">
 

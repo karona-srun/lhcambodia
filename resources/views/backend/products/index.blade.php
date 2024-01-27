@@ -25,18 +25,18 @@
                             <tr>
                                 <th>{{ __('app.table_no') }}</th>
                                 <th>{{ __('app.table_photo') }}</th>
-                                <th>{{ __('app.product_category') }}</th>
-                                <th>{{ __('app.product_sub_category') }}</th>
-                                <th>{{ __('app.code') }}</th>
-                                <th>{{ __('app.label_color_code') }}</th>
-                                <th>{{ __('app.label_name') }}{{ __('app.product') }}</th>
-                                <th>{{ __('app.label_scale') }}</th>
+                                <th class="w-15">{{ __('app.product_category') }}</th>
+                                <th class="w-15">{{ __('app.product_sub_category') }}</th>
+                                <th class="w-10">{{ __('app.code') }}</th>
+                                <th class="w-10">{{ __('app.label_color_code') }}</th>
+                                <th class="w-10">{{ __('app.label_name') }}{{ __('app.product') }}</th>
+                                <th class="w-10">{{ __('app.label_scale') }}</th>
                                 <th>{{ __('app.label_salling_price') }}</th>
                                 <th>{{ __('app.label_buying_price') }}</th>
                                 <th>{{ __('app.label_buying_date') }}</th>
                                 <th>{{ __('app.label_store_stock') }}</th>
                                 <th>{{ __('app.label_warehouse') }}</th>
-                                <th>{{ __('app.table_action') }}</th>
+                                <th class="w-15">{{ __('app.table_action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,8 +44,8 @@
                                 <tr class="{{ $item->store_stock == 0 ? 'bg-danger' : '' }}">
                                     <td>{{ ++$i }}</td>
                                     <td style="width:70px !important"><img src="{{ url('products/'.$item->photo) }}" class="img-size-50 img-thumbnail" srcset=""/></td>
-                                    <td>{{ $item->subCategory->name ?? '' }}</td>
-                                    <td>{{ $item->productCategory->name ?? '' }}</td>
+                                    <td>. {{ $item->subCategory->name_km ?? '' }}<br>. {{ $item->subCategory->name ?? '' }}</td>
+                                    <td>.{{ $item->productCategory->name_km ?? '' }}<br>. {{ $item->productCategory->name ?? '' }}</td>
                                     <td>{{ $item->product_code }}</td>
                                     <td>{{ $item->color_code }}</td>
                                     <td>{{ $item->product_name }}</td>

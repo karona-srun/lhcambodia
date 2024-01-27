@@ -17,11 +17,30 @@
                 </div>
 
                 <div class="card-body">
-                    <form id="quickForm" action="{{ url('product-category') }}" method="post">
+                    <form id="quickForm" action="{{ url('product-category') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
+                                    <div class="text-center mb-2 container">
+                                        <img id="blah" src="{{ asset('images/product_image.png') }}" width="150px"​
+                                            height="150px" class="img-bordered" alt=""
+                                            srcset="">
+                                        <input type="file" name="photo" id="imgInp" accept="image/*"
+                                            class="btn  btn-file mt-2 imgInp" style="display: none">
+                                        @if ($errors->has('photo'))
+                                            <div class="error text-danger text-sm mt-1">
+                                                {{ $errors->first('photo') }}</div>
+                                        @endif
+                                        <div>
+                                            <button type="button"
+                                                class="btn btn-outline-primary mt-3 blah"> <i class="fas fa-images"></i> {{ __('app.btn_browser') }}</button></div>
+                                        </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="row">
+                                      
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                     <label>{{ __('app.code') }} <small
                                             class="text-red">*</small></label>
@@ -33,7 +52,7 @@
                                     @endif
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                     <label>{{ __('app.product_category') }} <small
                                             class="text-red">*</small></label>
@@ -45,6 +64,21 @@
                                     @endif
                                     </div>
                                 </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                    <label>{{ __('app.product_category_km') }} <small
+                                            class="text-red">*</small></label>
+                                    <input type="text" name="name_km" class="form-control" value="{{ old('name') }}"
+                                        placeholder="{{ __('app.label_required') }}{{ __('app.product_category_km') }}">
+                                    @if ($errors->has('name_km'))
+                                        <div class="error text-danger text-sm mt-1">
+                                            {{ $errors->first('name_km') }}</div>
+                                    @endif
+                                    </div>
+                                </div>
+  
+                            </div>
+                        </div>
                             </div>
                             <div class="form-group">
                                 <label>{{ __('app.label_note') }}</label>

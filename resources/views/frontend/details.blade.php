@@ -1,8 +1,30 @@
 @extends('layouts.frontend')
 
 @section('content')
-    <div class="content bg-light">
-        <div class="container mt-4 mb-5">
+    <div class="content">
+        <div class="container">
+            <div class="content-header">
+                <div class="row">
+                    <div class="col-sm-12 clear-pl">
+                        <h1 class="m-0">{{ __('app.product') }}</h1>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ url('/') }}" class="text-muted"> <i class=" fas fa-home"></i> {{ __('app.home_page') }}</a>
+                            </li>
+                            @foreach ($data as $key => $item)
+                                @if ($loop->last)
+                                    <li class="breadcrumb-item"><a href="{{ url($key) }}">{!! $item !!}</a>
+                                    </li>
+                                @else
+                                    <li class="breadcrumb-item active"><a href="{{ url($key) }}" class=" text-muted">{{ $item }}</a></li>
+                                @endif
+                            @endforeach
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container mt-4 pb-5">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card">
@@ -12,13 +34,13 @@
                             <a href="{{ url('/') }}"
                                 class="btn btn-block btn-light text-sm-left">{{ __('app.label_all') }}</a>
                             @foreach ($productCategory as $cate)
-                                <a href="#" class="btn btn-block btn-light text-sm-left">{{ $cate->name }}</a>
+                                <a href="#" class="btn btn-block btn-light text-sm-left">{{ app()->getLocale() == 'en' ? $cate->name : $cate->name_km }}</a>
                             @endforeach
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9">
-                    <h5 class="text-muted">ផលិតផលដែលពេញនិយម</h5>
+                <div class="col-lg-9 mt-3">
+                    <h5 class="text-muted">{{ __('app.product_info')}}</h5>
                     <hr class="style4">
                     <div class="row">
                         <div class="col-sm-12">
@@ -43,38 +65,33 @@
                                         </div>
                                         <div class="col-12 col-sm-6">
                                             <h3 class="my-3">{{ $product->product_name }}</h3>
-                                            <p>{{ Str::limit($product->description, 200) }}</p>
                                             <hr>
+                                            <h5 class="my-2 text-color-lhc">{{"$" . number_format($product->salling_price, 2, ".", ".")  }}</h5>
+                                            <h6 class="my-1">{{ __('app.code')}}: {{ $product->product_code }}</h6>
+                                            <h6 class="my-1">{{ __('app.label_color_code')}}: {{ $product->color_code }}</h6>
 
                                             <h5 class="mt-3">{{ __('app.label_scale') }}</h5>
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-default  text-center">
+                                                <label class="btn btn-default btn-flat text-center">
                                                     <input type="radio" name="color_option" id="color_option_b1"
                                                         autocomplete="off">
                                                     <span class="text-lg">{{ $product->scale }}</span>
                                                 </label>
                                             </div>
-
+                                            <div class="mt-4">
+                                                <a href="#" class="btn btn-primary btn-flat">
+                                                    <i class="fas fa-cart-plus mr-2"></i>
+                                                    <span style="font-family: 'Khmer' !important;">{{__('app.label_add_cart')}}</span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row mt-4">
-                                        <nav class="w-100">
-                                            <div class="nav nav-tabs" id="product-tab" role="tablist">
-                                                <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab"
-                                                    href="#product-desc" role="tab" aria-controls="product-desc"
-                                                    aria-selected="true">{{ __('app.label_description') }}</a>
-                                                <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab"
-                                                    href="#product-comments" role="tab" aria-controls="product-comments"
-                                                    aria-selected="false">{{ __('app.label_note') }}</a>
-                                            </div>
-                                        </nav>
-                                        <div class="tab-content p-3" id="nav-tabContent">
-                                            <div class="tab-pane fade show active" id="product-desc" role="tabpanel"
-                                                aria-labelledby="product-desc-tab">
-                                                {{ $product->description }}
-                                            </div>
-                                            <div class="tab-pane fade" id="product-comments" role="tabpanel"
-                                                aria-labelledby="product-comments-tab"> {{ $product->note }} </div>
+                                    <div class="row mt-4 mb-5">
+                                        <div class="col-sm-12 p-3">
+                                            <p class="style-lhc">
+                                                <span style="border: 1px solid transparent;background: #f58f5a; padding: 5px 10px 2px 10px;color: #fff;">{{ __('app.label_description') }}</span>
+                                            </p>
+                                            <div class="mt-4">{!!$product->description !!}</div> 
                                         </div>
                                     </div>
                                 </div>
@@ -86,11 +103,11 @@
         </div>
     </div>
 
-    <div class="content bg-white pt-1 pb-1">
-        <div class="container mt-5 mb-5">
+    <div class="content bg-white mt-5 mb-5">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h5 class="text-muted">ផលិតផលដែលពេញនិយម
+                    <h5 class="text-muted mt-4">{{__('app.product_pop')}}
                         <a href="http://" class=" float-right btn btn-link text-muted text-md">{{ __('app.label_all') }} <i
                                 class="fas fa-angle-double-right"></i></a>
                     </h5>

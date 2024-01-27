@@ -24,7 +24,7 @@
             </div>
         </div>
         <hr>
-        <div class="container mt-4">
+        <div class="container mt-4 pb-5">
             <div class="row">
                 <div class="col-sm-12">
                     <div id="accordion">

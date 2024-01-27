@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\ProductCategory;
+use App\Models\ProductSubCategoory;
 use App\Models\SystemProfile;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +32,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         $profile = SystemProfile::first();
-        View::share(['profile' => $profile]);
+        $productCategory = ProductCategory::get();
+        $productSubCategory = ProductSubCategoory::get();
+        View::share(['profile' => $profile, 'menu' => $productCategory,'submenu' => $productSubCategory]);
 
         Schema::defaultStringLength(191);
     }
