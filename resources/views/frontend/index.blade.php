@@ -102,17 +102,16 @@
                     <div class="row">
                         @foreach ($productes as $product)
                             <div class="col-sm-2">
+                                <a href="{{ url('/product-details', $product->id) }}">
                                 <div class="card">
                                     <div class="card-body">
                                         <img src="{{ url('products/' . $product->photo) }}"
                                             class="img-item-product img-fluid">
                                         <p class="card-title text-muted">
                                             {{ $product->product_name_km }}<br>{{ $product->product_name }}</p>
-
-                                        <a href="{{ url('/product-details', $product->id) }}"
-                                            class="btn btn-block btn-outline-primary card-text mt-3 text-center">{{ __('app.label_more_info') }}</a>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>
