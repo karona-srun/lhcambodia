@@ -24,6 +24,45 @@
             </div>
         </div>
         <hr>
+        <div class="container">
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="text-muted mb-3">{{ __('app.product_category') }}</h5>
+                        <hr>
+                        <a href="{{ url('/') }}"
+                            class="btn btn-block btn-light text-sm-left">{{ __('app.label_all') }}</a>
+                        @foreach ($productCategory as $menu_item)
+                            <a href="#"
+                                class="btn btn-block btn-light text-color-lhc text-sm-left"><i class="fas fa-angle-double-right me-3"></i> {{ app()->getLocale() == 'en' ? $menu_item->name : $menu_item->name_km }}</a>
+                                @foreach ($menu_item->subCategory as $submenu)
+                                <a href="{{ url('/decor-product/'.strtolower(str_replace(' ','-',$menu_item->name)).'/'.strtolower(str_replace(' ','-',$submenu->name)),$submenu->id) }}"
+                                    class="btn btn-block {{ request()->id == $submenu->id ? 'btn-lhc' : 'btn-light' }} text-sm-left pl-4">{{ app()->getLocale() == 'en' ? $submenu->name : $submenu->name_km }}</a>
+
+                                @endforeach
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+        @foreach ($product as $item)
+                                    <div class="col-sm-4">
+                                        <div class="card">
+                                            <a href="{{ url('/products/details', $item->id) }}">
+                                            <img class="card-img-top" src="{{ url('products/' . $item->photo) }}" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-muted">{{ app()->getLocale() == "km" ? $item->product_name_km : $item->product_name }}</h5>
+                                                <p class="card-text text-color-lhc">{{"$" . number_format($item->salling_price, 2, ".", ".")  }}</p>
+                                            </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+        </div>
     </div>
 @endsection
 @section('js')

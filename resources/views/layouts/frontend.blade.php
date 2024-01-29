@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/dist/css/custom.css') }}">
     <style>
         .navbar-light .navbar-nav .nav-link {
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: #343434 !important;
         }
 
@@ -25,7 +25,8 @@
 
         .style-lhc {
             bottom: 0px;
-            border-bottom:  2px solid #f58f5a;
+            border-bottom: 2px solid #f58f5a;
+            padding-bottom: 10px;
         }
 
         .nav-link:hover .dropdown-menu {
@@ -62,7 +63,6 @@
         }
 
         .nav-item:hover {
-            padding: 0 5px;
             border-bottom: 1.5px solid #f58f5a;
         }
 
@@ -91,11 +91,11 @@
             border-bottom: 1px solid transparent !important;
         }
 
-        .breadcrumb-item a:hover{
+        .breadcrumb-item a:hover {
             color: #f58f5a !important;
         }
 
-        a{
+        a {
             color: #f58f5a;
         }
 
@@ -106,23 +106,62 @@
             margin: 0;
         }
 
-        .box-shadow{
+        .box-shadow {
             box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
         }
 
-        .box-shadow:hover{
+        .box-shadow:hover {
             box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
         }
 
-        .btn-more
-        {
+        .btn-more {
             margin-top: -10px;
         }
-        .btn-lhc{
+
+        .btn-lhc {
             background-color: #f58f5a;
         }
-        .text-color-lhc{
+
+        .text-color-lhc {
             color: #f58f5a;
+        }
+
+        .card-hover:hover {
+            border: 1px solid #f58f5a !important;
+        }
+
+        /* Effect Zoom of Image */
+        #img-zoomer-box {
+            max-width: 500px;
+            height: auto;
+            position: relative;
+            margin: 0px auto;
+        }
+
+        #img-zoomer-box:hover,
+        #img-zoomer-box:active {
+            cursor: zoom-in;
+            display: block;
+        }
+
+        #img-zoomer-box:hover #img-2,
+        #img-zoomer-box:active #img-2 {
+            opacity: 1;
+        }
+
+        #img-2 {
+            width: 350px;
+            height: 350px;
+            background: url('') no-repeat #FFF;
+            box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+            pointer-events: none;
+            position: absolute;
+            opacity: 0;
+            border: 1px solid whitesmoke;
+            z-index: 99;
+            border-radius: 1%;
+            display: block;
+            transition: opacity .2s;
         }
     </style>
 </head>
@@ -133,10 +172,11 @@
             <header class=" py-1 pt-2">
                 <div class="row flex-nowrap justify-content-between align-items-center">
                     <div class="col-sm-12 col-xl-4 col-md-4">
-                        <a class="btn btn-icon btn-outline-link" href="{{ 'tel:' . $profile->tel }}"> <i
+                        <a class="btn btn-icon btn-outline-link text-color-lhc" href="{{ 'tel:' . $profile->tel }}"> <i
                                 class="fas fa-mobile-alt"></i> {{ $profile->tel }}</a>
-                        <a class="btn btn-icon btn-outline-link" href="{{ 'mailto:' . $profile->email }}"> <i
-                                class="far fa-envelope"></i> {{ $profile->email }}</a>
+                        <a class="btn btn-icon btn-outline-link text-color-lhc"
+                            href="{{ 'mailto:' . $profile->email }}"> <i class="far fa-envelope"></i>
+                            {{ $profile->email }}</a>
                     </div>
                     <div class="col-sm-12 col-xl-4 col-md-4 text-center">
                         <a class="blog-header-logo text-dark" href="#">
@@ -147,8 +187,8 @@
                         </a>
                     </div>
                     <div class="col-sm-12 col-xl-4 col-md-4 d-flex justify-content-end align-items-center">
-                        <a class="btn btn-icon btn-lhc text-white btn-outline-link" href="{{ url('/admin/login') }}"> <i
-                                class="fas fa-sign-in-alt me-2"></i> {{ __('app.label_login') }}</a>
+                        <a class="btn btn-icon btn-lhc text-white btn-outline-link" href="{{ url('/admin/login') }}">
+                            <i class="fas fa-sign-in-alt me-2"></i> {{ __('app.label_login') }}</a>
                         <div class="dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false" class="nav-link dropdown-toggle "><img
@@ -193,7 +233,8 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="{{ url('/') }}" class="nav-link"> <i class=" fas fa-home"></i> {{ __('app.home_page') }}</a>
+                                    <a href="{{ url('/') }}" class="nav-link"> <i class=" fas fa-home"></i>
+                                        {{ __('app.home_page') }}</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <div class="row">
@@ -207,14 +248,17 @@
 
                                                 <div class="d-md-flex align-items-start justify-content-start">
                                                     @foreach ($menu as $menu_item)
-                                                    <div>
-                                                        <div class="dropdown-header">
-                                                            <h6 class="dropdown-title">{{ app()->getLocale() == 'en' ? $menu_item->name : $menu_item->name_km  }}</h6>
+                                                        <div>
+                                                            <div class="dropdown-header">
+                                                                <h6 class="dropdown-title">
+                                                                    {{ app()->getLocale() == 'en' ? $menu_item->name : $menu_item->name_km }}
+                                                                </h6>
+                                                            </div>
+                                                            @foreach ($menu_item->submenu as $item)
+                                                                <a class="dropdown-item"
+                                                                    href="{{ url('/decor-product/' . strtolower(str_replace(' ', '-', $menu_item->name)) . '/' . strtolower(str_replace(' ', '-', $item->name)), $item->id) }}">{{ app()->getLocale() == 'en' ? $item->name : $item->name_km }}</a>
+                                                            @endforeach
                                                         </div>
-                                                        @foreach ($menu_item->submenu as $item)
-                                                            <a class="dropdown-item" href="{{ url('/decor-product/'.strtolower(str_replace(' ','-',$menu_item->name)).'/'.strtolower(str_replace(' ','-',$item->name)),$item->id) }}">{{ app()->getLocale() == 'en' ? $item->name : $item->name_km }}</a>
-                                                        @endforeach
-                                                    </div>
                                                     @endforeach
                                                     {{-- <div>
                                                         <div class="dropdown-header">
@@ -327,7 +371,7 @@
                                         aria-haspopup="true" aria-expanded="false"
                                         class="nav-link dropdown-toggle">{{ __('app.our_project_page') }}</a>
                                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                        <li><a href="{{ url('photo-gallery')}}"
+                                        <li><a href="{{ url('photo-gallery') }}"
                                                 class="dropdown-item">{{ __('app.photo_galleries_page') }}</a>
                                         </li>
                                     </ul>
@@ -384,6 +428,42 @@
                 theme: 'bootstrap4',
                 minimumResultsForSearch: Infinity,
             });
+
+            let zoomer = function() {
+                document.querySelector('#img-zoomer-box')
+                    .addEventListener('mousemove', function(e) {
+                        let orig = $('#img-1').attr('src');
+                        $('#img-2').css('background', 'url(' + orig + ') no-repeat #fff');
+                        let original = document.querySelector('#img-1'),
+                            magnified = document.querySelector('#img-2'),
+                            style = magnified.style,
+                            x = e.pageX - 320,
+                            y = e.pageY - 320,
+                            imgWidth = original.offsetWidth,
+                            imgHeight = original.offsetHeight,
+                            xperc = ((x / imgWidth) * 100),
+                            yperc = ((y / imgHeight) * 100);
+
+
+                        console.log(e.pageX+'---'+this.offsetLeft)
+                        //lets user scroll past right edge of image
+                        if (x > (.01 * imgWidth)) {
+                            xperc += (.15 * xperc);
+                        };
+
+                        //lets user scroll past bottom edge of image
+                        if (y >= (.01 * imgHeight)) {
+                            yperc += (.15 * yperc);
+                        };
+
+                        style.backgroundPositionX = (xperc - 10) + '%';
+                        style.backgroundPositionY = (yperc - 10) + '%';
+
+                        style.left = (x - 180) + 'px';
+                        style.top = (y - 180) + 'px';
+
+                    }, false);
+            }();
         });
     </script>
 </body>

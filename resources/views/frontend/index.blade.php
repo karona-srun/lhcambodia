@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
 @section('content')
-    <div class="content bg-white">
+    <div class="content">
         <div class="container">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -77,8 +77,8 @@
                                 </div>
                                 @foreach ($productCat->product as $item)
                                     <div class="col-sm-4">
-                                        <div class="card" style="box-shadow: 0 0 0px rgba(0,0,0,.125), 0 0px 0px rgba(0,0,0,.2)">
-                                            <a href="{{ url('/product-details', $item->id) }}">
+                                        <div class="card">
+                                            <a href="{{ url('/products/details', $item->id) }}">
                                             <img class="card-img-top" src="{{ url('products/' . $item->photo) }}" alt="Card image cap">
                                             <div class="card-body">
                                                 <h5 class="card-title text-muted">{{ app()->getLocale() == "km" ? $item->product_name_km : $item->product_name }}</h5>
@@ -93,26 +93,26 @@
                         <hr class="style4">
                     @endforeach
 
-                    <h5 class="text-muted">{{ __('app.label_new_product') }}
+                    <h5 class=" text-color-lhc">{{ __('app.label_new_product') }}
                         <a href="{{ url('products-list') }}"
-                            class=" float-right btn btn-link text-muted text-md">{{ __('app.label_all') }} <i
+                            class="float-right btn btn-link text-muted text-md">{{ __('app.label_all') }} <i
                                 class="fas fa-angle-double-right"></i></a>
                     </h5>
                     <hr class="style4">
                     <div class="row">
                         @foreach ($productes as $product)
-                            <div class="col-sm-2">
-                                <a href="{{ url('/product-details', $product->id) }}">
+                        <div class="col-sm-3">
+                                <a href="{{ url('/products/details', $product->id) }}">
                                 <div class="card">
                                     <div class="card-body">
                                         <img src="{{ url('products/' . $product->photo) }}"
-                                            class="img-item-product img-fluid">
-                                        <p class="card-title text-muted">
-                                            {{ $product->product_name_km }}<br>{{ $product->product_name }}</p>
+                                            class="" width="100%">
+                                            <h5 class="card-title text-muted">{{ app()->getLocale() == "km" ? $product->product_name_km : $product->product_name }}</h5>
+                                            <p class="card-text text-color-lhc">{{"$" . number_format($product->salling_price, 2, ".", ".")  }}</p>
                                     </div>
                                 </div>
                                 </a>
-                            </div>
+                        </div>
                         @endforeach
                     </div>
 

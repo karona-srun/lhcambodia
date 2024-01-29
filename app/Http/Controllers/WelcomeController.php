@@ -63,7 +63,9 @@ class WelcomeController extends Controller
             $slug2 =>  ucwords(str_replace('-', ' ', $slug2))
         ];
         $productCategory = ProductCategory::get();
-        return view('frontend.pages.decor_product_filter_category', compact('data','productCategory'));
+        $product = Product::where('product_sub_category_id', $id)->get();
+
+        return view('frontend.pages.decor_product_filter_category', compact('data','productCategory','product'));
     }
 
     public function search(Request $request)
