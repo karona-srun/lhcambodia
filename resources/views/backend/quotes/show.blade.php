@@ -9,17 +9,17 @@
                 <div class="card-header">
                     <div class="card-tools">
                         @can('Quote Edit')
-                            <a href="{{ url('quotes-print', $quote->id) }}" class="btn ight"> <i
+                            <a href="{{ url('quotes-print', $quote->id) }}" class="btn btn-light"> <i
                                     class="fas fa-print"></i>
                                 {{ __('app.btn_print') }}</a>
                         @endcan
                         @can('Quote Edit')
-                            <a href="{{ route('quotes.edit', $quote->id) }}" class="btn arning"> <i
+                            <a href="{{ route('quotes.edit', $quote->id) }}" class="btn btn-warning"> <i
                                     class="fas fa-edit"></i>
                                 {{ __('app.btn_edit') }}</a>
                         @endcan
                         @can('Quote List')
-                            <a href="{{ url('quotes') }}" class="btn rimary"> <i class="fas fa-arrow-left"></i>
+                            <a href="{{ url('quotes') }}" class="btn btn-primary"> <i class="fas fa-arrow-left"></i>
                                 {{ __('app.btn_back') }}</a>
                         @endcan
                     </div>

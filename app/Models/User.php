@@ -63,6 +63,11 @@ class User extends Authenticatable
         return $this->belongsTo(User::class,'updated_by');
     }
 
+    public function contacts()
+    {
+        return Contact::where('replied_at')->get();
+    }
+
     public function getIDRoles() 
     {
         $status = false;

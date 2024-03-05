@@ -54,16 +54,23 @@ class ContactController extends Controller
         if($validator->fails()) {
             return Redirect::back()->withErrors($validator)->withInput();
         }
-
         $contact = new Contact();
         $contact->fullname = $request->fullname;
         $contact->email = $request->email;
         $contact->phone = $request->phone;
         $contact->you_are = $request->you_are;
         $contact->content = $request->content;
+        if($request->product_id){
+            $contact->product_id = $request->product_id;
+            $contact->import_type = json_encode($request->import,true);
+        }
         $contact->save();
 
-        return redirect('/contact-us')->with('success', __('app.contact_us_page').__('app.label_created_successfully'));
+        if($request->product_id){
+            return redirect()->back()->with('contact', __('app.contact_us_page').__('app.label_created_successfully'));
+        }
+
+        return redirect('/contact-us')->with('contact', __('app.contact_us_page').__('app.label_created_successfully'));
     }
 
     /**

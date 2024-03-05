@@ -10,7 +10,7 @@
                     <h3 class="card-title">{{ __('app.role_permission') }}</h3>
                     <div class="card-tools">
                         @can('Role Create')
-                        <a href="{{ route('roles.create') }}" class="btn rimary"> <i class=" fas fa-plus"></i>
+                        <a href="{{ route('roles.create') }}" class="btn btn-primary"> <i class=" fas fa-plus"></i>
                             {{ __('app.btn_add') }}</a>
                         @endcan
                     </div>
@@ -34,9 +34,9 @@
                                     <td>{{ $item->created_at->format('d-m-Y h:i:s A') }}</td>
                                     <td>{{ $item->updated_at->format('d-m-Y h:i:s A') }}</td>
                                     <td>
-                                        <a href="{{ route('roles.show',$item->id) }}" class="btn rimary"><i
+                                        <a href="{{ route('roles.show',$item->id) }}" class="btn btn-primary"><i
                                                 class="far fa-eye"></i></a>
-                                        <a href="{{ route('roles.edit',$item->id) }}" class="btn arning"><i
+                                        <a href="{{ route('roles.edit',$item->id) }}" class="btn btn-warning"><i
                                                 class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>

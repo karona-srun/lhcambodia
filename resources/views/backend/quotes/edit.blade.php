@@ -70,6 +70,7 @@
                                             <th>{{ __('app.label_qty') }}</th>
                                             <th>{{ __('app.label_price') }}</th>
                                             <th>{{ __('app.label_unit') }}</th>
+                                            <th>{{ __('app.label_discount')}}</th>
                                             <th>{{ __('app.label_total_amount') }}</th>
                                             <th></th>
                                         </tr>
@@ -82,7 +83,7 @@
                                                         value="{{ $item->productes->product_code }}">
                                                 </td>
                                                 <td>
-                                                    <select class="form-control select2_el product" name="product[]">
+                                                    <select class="form-control select2 select2_el product" name="product[]">
                                                         @foreach ($products as $prod)
                                                             <option value="{{ $prod->id }}"
                                                                 {{ $prod->id == $item->product_id ? 'selected' : '' }}>
@@ -91,7 +92,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="number" name="qty[]" class="form-control qty"
+                                                    <input type="number" step="any" name="qty[]" class="form-control qty"
                                                         value="{{ $item->qty }}">
                                                 </td>
                                                 <td>
@@ -106,6 +107,9 @@
                                                 <td>
                                                     <input type="text" name="unit[]" class="form-control unit"
                                                         value="{{ $item->unit }}">
+                                                </td>
+                                                <td>
+                                                    <input type="number" step="any" id="discount" name="discount[]" class="form-control discount" value="{{ $item->discount }}">
                                                 </td>
                                                 <td>
                                                     <input type="number" id="total_amount" name="total_amount[]"
@@ -209,7 +213,14 @@
                             </div>
                         </td>
                         <td>
-                            <input type="text" name="unit[]" class="form-control unit" >
+                            <select name="unit[]" class="form-control select2" style="width: 100%">
+                                @foreach (__('app.unit_list') as $lang => $unit)
+                                <option value="{{ $unit }}">{{ $unit }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" id="discount" name="discount[]" class="form-control discount" value="0">
                         </td>
                         <td>
                             <input type="number" id="total_amount" name="total_amount[]" class="form-control total_amount" readonly>
@@ -230,6 +241,11 @@
             });
 
             function initailizeSelect2(rowIdx) {
+                $('.select2s').select2({
+                    theme: 'bootstrap4',
+                    minimumResultsForSearch: Infinity,
+                });
+                
                 $(".product").change(function(e) {
                     $.ajax({
                         type: "get",
@@ -278,7 +294,7 @@
                     }
                     var price = parseFloat(selectors.find('.amount').val());
                     var total = (price * quantity);
-                    selectors.find('.total_amount').val(total); //add total
+                    selectors.find('.total_amount').val(total.toFixed(2)); //add total
                     // var mult = 0;
                     // //loop through trs
                     // $("tr").each(function() {

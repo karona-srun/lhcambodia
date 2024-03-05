@@ -117,7 +117,7 @@
             <div class="icon">
                 <i class="fas fa-history"></i>
             </div>
-            <a href="{{ url('incomes') }}" class="small-box-footer">{{ __('app.label_more_info')}} <i
+            <a href="{{ url('revenue') }}" class="small-box-footer">{{ __('app.label_more_info')}} <i
                     class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
@@ -130,7 +130,7 @@
             <div class="icon">
                 <i class="fas fa-history"></i>
             </div>
-            <a href="{{ url('expends') }}" class="small-box-footer">{{ __('app.label_more_info')}} <i
+            <a href="{{ url('expend') }}" class="small-box-footer">{{ __('app.label_more_info')}} <i
                     class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>

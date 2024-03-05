@@ -161,7 +161,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>{{ __('app.label_qty') }}<small class="text-red">*</small></label>
-                                        <input type="number" name="product_qty" class="form-control input-qty"
+                                        <input type="number" step="any" name="product_qty" class="form-control input-qty"
                                             required></input>
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@
                                             </div>
                                             <input type="number" name="discount" step="any"
                                                 class="form-control discount" placeholder="0.0"
-                                                value="{{ old('discount') }}" required />
+                                                value="{{ old('discount') ?? 0 }}" required />
                                         </div>
                                     </div>
                                 </div>
@@ -461,8 +461,8 @@
                                 <a href="#" class="btn btn-primary" data-toggle="modal"
                                     data-target="#modalNewCustomer"
                                     data-backdrop="static">{{ __('app.label_new_customer') }}</a>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdropLoading">
-                                    <i class=" fas fa-dashboard"></i>
+                                <button type="button" style="display: none;" class="btn btn-primary in-progress" data-toggle="modal" data-target="#staticBackdropLoading">
+                                    <i class=" fas fa-procedures"></i>
                                 </button>
                             </div>
                         </div>
@@ -520,7 +520,7 @@
                                                 value="{{ $item->scale }}">
                                         </td>
                                         <td>{{ $item->qty }}
-                                            <input type="hidden" name="product_qty[]" value="{{ $item->qty }}">
+                                            <input type="hidden" step="any" name="product_qty[]" value="{{ $item->qty }}">
                                         </td>
                                         <td>{{ $item->unit }}
                                             <input type="hidden" name="product_unit[]"
@@ -566,9 +566,9 @@
                                         <div class="input-group-prepend rounded-0">
                                             <span class="input-group-text">$</span>
                                         </div>
-                                        <input type="number" name="total_payment" readonly
+                                        <input type="text" name="total_payment" readonly
                                             class="form-control rounded-0 total_payment" id="total_payment"
-                                            placeholder="0.0"
+                                            placeholder="0.0" data-val="{{$addCart->SUM('amount')}}"
                                             value="{{ number_format($addCart->SUM('amount'), 2) }}" />
                                     </div>
                                 </div>
@@ -613,8 +613,9 @@
 
         $('#deposit').keyup(function() {
             var deposit = $(this).val();
-            var total = $("#total_payment").val();
+            var total = $("#total_payment").data('val');
             var balance = parseFloat(total) - parseFloat(deposit);
+
             $("#balance").val(balance);
         });
 
@@ -626,6 +627,7 @@
             if ($('#customer').val() === '') {
                 $('.confirm-customer').click();
             } else {
+                $('.in-progress').click();
                 $('.formCartList, .btn-pay').removeAttr("type").attr("type", "submit").click();
             }
         });

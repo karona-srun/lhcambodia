@@ -160,7 +160,7 @@
                             </div>
                         </td>
                         <td>
-                            <input type="number" name="qty[]" class="form-control qty" >
+                            <input type="number" step="any" name="qty[]" class="form-control qty" >
                         </td>
                         <td>
                             <div class="input-group">
@@ -171,14 +171,14 @@
                             </div>
                         </td>
                         <td>
-                            <select name="unit[]" class="form-control select2" style="width: 100%">
+                            <select name="unit[]" class="form-control select2 select2s" style="width: 100%">
                                 @foreach (__('app.unit_list') as $lang => $unit)
                                 <option value="{{ $unit }}">{{ $unit }}</option>
                                 @endforeach
                             </select>
                         </td>
                         <td>
-                            <input type="number" id="discount" name="discount[]" class="form-control discount">
+                            <input type="number" id="discount" name="discount[]" class="form-control discount" value="0">
                         </td>
                         <td>
                             <input type="number" id="total_amount" name="total_amount[]" class="form-control total_amount" readonly>
@@ -199,6 +199,11 @@
             });
 
             function initailizeSelect2(rowIdx) {
+                $('.select2s').select2({
+                    theme: 'bootstrap4',
+                    minimumResultsForSearch: Infinity,
+                });
+                
                 $(".product").change(function(e) {
                     $.ajax({
                         type: "get",
@@ -280,7 +285,7 @@
                     }
                     price = parseFloat(selectors.find('.amount').val());
                     total = (price * quantity);
-                    selectors.find('.total_amount').val(total); //add total
+                    selectors.find('.total_amount').val(total.toFixed(2)); //add total
                     // var mult = 0;
                     // //loop through trs
                     // $("tr").each(function() {

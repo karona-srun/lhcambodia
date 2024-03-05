@@ -184,7 +184,7 @@ class SaleController extends Controller
             $saleDetail->product_code = $request->product_code[$index];
             $saleDetail->product_name = $request->product_name[$index];
             $saleDetail->photo = $request->product_photo[$index];
-            $saleDetail->scale = $request->product_amount[$index];
+            $saleDetail->scale = $request->product_scale[$index];
             $saleDetail->qty = $request->product_qty[$index];
             $saleDetail->unit = $request->product_unit[$index];
             $saleDetail->discount = $request->product_discount[$index];
@@ -192,10 +192,9 @@ class SaleController extends Controller
             $saleDetail->amount = $request->product_amount[$index];
             $saleDetail->note = $request->product_note[$index];
             $saleDetail->save();
-
-            $addCart = AddCart::find($request->add_cart_id[$index]);
-            $addCart->delete();
         }
+
+        AddCart::truncate();
         $this->sendNotification($sale->id);
         return Redirect()->back();
     }

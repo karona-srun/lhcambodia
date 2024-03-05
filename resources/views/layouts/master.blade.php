@@ -104,6 +104,33 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="fas fa-headset"></i>
+                        <span class="badge badge-light bg-danger badge-xs navbar-badge"
+                            style="margin-top: -5px;font-size: 12px; padding: 4px 4px 1px 4px;">{{ auth()->user()->contacts()->count() }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right div-with-scroll">
+                        @foreach (auth()->user()->contacts() as $notification)
+                            <a href="{{ url('contacts/'.$notification->id) }}"
+                                class="dropdown-item">
+                                <div class="media">
+                                    <img src="{{ asset('images/avatar.png') }}" alt="User Avatar"
+                                        class="img-size-32 mr-3 img-circle">
+                                    <div class="media-body">
+                                        <h3 class="dropdown-item-title text-sm mt-1">
+                                            
+                                            {{ __('app.label_received_notification') }} <br>
+                                            <span class="float-right text-sm"><i class="far fa-clock"></i>
+                                                {{ $notification->created_at->diffForHumans() }}</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
                         <span class="badge badge-light bg-danger badge-xs navbar-badge"
                             style="margin-top: -5px;font-size: 12px; padding: 4px 4px 1px 4px;">{{ auth()->user()->unreadNotifications->count() }}</span>
@@ -236,9 +263,9 @@
                             </li>
                         @endcan
                         <li
-                            class="nav-item {{ Request::is('faqs*') ? 'menu-is-opening menu-open' : null }} ">
+                            class="nav-item {{ Request::is('faqs*') || Request::is('abouts*') || Request::is('contacts*') || Request::is('slideshow*') || Request::is('photo-galleries*') ? 'menu-is-opening menu-open' : null }} ">
                             <a href="#"
-                                class="nav-link {{ Request::is('faqs*') ? 'active' : null }} ">
+                                class="nav-link {{ Request::is('faqs*') || Request::is('abouts*') || Request::is('contacts*') || Request::is('slideshow*') || Request::is('photo-galleries*') ? 'active' : null }} ">
                                 <i class="nav-icon far fa-newspaper"></i>
                                 <p>
                                     {{ __('app.content_page')}}
@@ -690,16 +717,6 @@
                 $(this).parents(".hdtuto").remove();
             });
 
-            imgInp.onchange = evt => {
-                const [file] = imgInp.files
-                if (file) {
-                    blah.src = URL.createObjectURL(file)
-                }
-            }
-
-            $('.blah').on('click', function() {
-                $('.imgInp').trigger('click');
-            });
             // form purchase order
             $('.customer').change(function(event) {
                 var address = $('option:selected', this).attr('data-customer-address');

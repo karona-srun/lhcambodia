@@ -40,7 +40,7 @@
                                 <tr>
                                     <td>{{ ++$key }}</td>
                                     <td style="width:70px !important"><img src="{{ 'photos/'.$item->photo }}" class="img-size-50 img-thumbnail" srcset=""/></td>
-                                    <td>{{ $item->first_name}} {{ $item->last_name}}</td>
+                                    <td>{{ $item->last_name}} {{ $item->first_name}}</td>
                                     <td>{{ $item->first_name_kh}} {{ $item->last_name_kh}}</td>
                                     <td>{{ $item->phone}}</td>
                                     <td>{{ $item->email }}</td>

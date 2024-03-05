@@ -9,10 +9,10 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ __('app.user_info') }}</h3>
                     <div class="card-tools">
-                        <a href="{{ url('users-exportexcel') }}" class="btn utline-primary"> <i class=" fas fa-download"></i>
+                        <a href="{{ url('users-exportexcel') }}" class="btn btn-outline-primary"> <i class=" fas fa-download"></i>
                             {{ __('app.btn_download') }}</a>
                         @can('User Create')
-                            <a href="{{ route('users.create') }}" class="btn rimary"> <i class=" fas fa-plus"></i>
+                            <a href="{{ route('users.create') }}" class="btn btn-primary"> <i class=" fas fa-plus"></i>
                                 {{ __('app.btn_add') }}</a>
                         @endcan
                     </div>
@@ -48,19 +48,19 @@
                                     <td>{{ $item->created_at->format('d-m-Y h:i:s A') }}</td>
                                     <td>{{ $item->updated_at->format('d-m-Y h:i:s A') }}</td>
                                     <td style="width:80px">
-                                        <a href="{{ route('users.show', $item->id) }}" class="btn rimary"><i
+                                        <a href="{{ route('users.show', $item->id) }}" class="btn btn-primary"><i
                                                 class="far fa-eye"></i></a>
                                         @can('User Edit')
                                         <a href="{{ url('/users/reset-password', $item->id) }}"
-                                            class="btn rimary"><i class="fas fa-key"></i> </a>
+                                            class="btn btn-primary"><i class="fas fa-key"></i> </a>
                                         @endcan
                                         @if ($item->blocked == true)
                                             <a href="{{ url('/users/toggle-blocked/' . $item->id . '/' . $item->blocked) }}"
-                                                class="btn rimary">
+                                                class="btn btn-primary">
                                                 <i class="fas fa-unlock-alt"></i></a>
                                         @else
                                             <a href="{{ url('/users/toggle-blocked/' . $item->id . '/' . $item->blocked) }}"
-                                                class="btn anger">
+                                                class="btn btn-danger">
                                                 <i class="fas fa-user-lock"></i></a>
                                             {{-- <button class="btn anger toggleBlockUser" data-toggle="modal"
                                                 data-target="#modal-default" data-id="{{ $item->id }}" data-block="{{ $item->blocked }}"><i

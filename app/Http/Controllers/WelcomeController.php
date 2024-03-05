@@ -40,6 +40,20 @@ class WelcomeController extends Controller
         return view('frontend.details', compact('product','productes','attachments','productCategory','data'));
     }
 
+    public function productsDetailsAddCart($id)
+    {
+        $product = Product::findOrFail($id);
+        $productes = Product::inRandomOrder()->limit(10)->get();
+        $productCategory = ProductCategory::get();
+        $attachments = Attachment::where(['type_id'=>$id,'type'=>'product'])->get();
+
+        $data = [
+            '/' => app()->getLocale() == "en" ? $product->productCategory->name : $product->productCategory->name_km,
+            '/#' => app()->getLocale() == "en" ? $product->subCategory->name : $product->subCategory->name_km
+        ];
+        return view('frontend.add_cart', compact('product','productes','attachments','productCategory','data'));
+    }
+
     public function getProductByCategory($id)
     {
         $productes = Product::where('product_category_id',$id)->get();

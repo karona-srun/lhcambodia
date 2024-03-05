@@ -17,7 +17,7 @@ class StaffInfo extends Model
     }
 
     public function getFullNameKhAttribute() {
-        return $this->last_name_kh.' '.$this->first_name_kh;
+        return $this->first_name_kh .' '.$this->last_name_kh;
     }
 
     public function departments()

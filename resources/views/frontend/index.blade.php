@@ -64,30 +64,39 @@
 
                     @foreach ($productCategory as $productCat)
                         <div class="row mb-3">
-                            <div class="{{ $productCat->photo == "" ? '' : 'col-sm-3' }}">
-                                <img src="{{ url('product_category', $productCat->photo) }}" width="100%" {{ $productCat->photo == "product_image.png" ? "height=360px" : ''}} class="rounded" alt=""
-                                    srcset="">
+                            <div class="{{ $productCat->photo == '' ? '' : 'col-sm-3' }}">
+                                <img src="{{ url('product_category', $productCat->photo) }}" width="100%"
+                                    {{ $productCat->photo == 'product_image.png' ? 'height=360px' : '' }} class="rounded"
+                                    alt="" srcset="">
                             </div>
-                            <div class="{{ $productCat->photo == "" ? 'col-sm-12' : 'col-sm-9' }}">
+                            <div class="{{ $productCat->photo == '' ? 'col-sm-12' : 'col-sm-9' }}">
                                 <div class="p-2 mt-2">
                                     <h6 class="text-bold border-primary">
-                                        {{ $productCat->product == "" ? '' : $productCat->name }}
-                                        <button class="btn btn-lhc btn-flat float-right btn-more">{{__('app.label_more_info')}}</button>
+                                        {{ $productCat->product == '' ? '' : $productCat->name }}
+                                        <button
+                                            class="btn btn-lhc btn-flat float-right btn-more">{{ __('app.label_more_info') }}</button>
                                     </h6>
                                 </div>
-                                @foreach ($productCat->product as $item)
-                                    <div class="col-sm-4">
-                                        <div class="card">
-                                            <a href="{{ url('/products/details', $item->id) }}">
-                                            <img class="card-img-top" src="{{ url('products/' . $item->photo) }}" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-muted">{{ app()->getLocale() == "km" ? $item->product_name_km : $item->product_name }}</h5>
-                                                <p class="card-text text-color-lhc">{{"$" . number_format($item->salling_price, 2, ".", ".")  }}</p>
+                                <div class="row">
+                                    @foreach ($productCat->product as $item)
+                                        <div class="col-sm-3">
+                                            <div class="card">
+                                                <a href="{{ url('/products/details', $item->id) }}">
+                                                    <img class="card-img-top" src="{{ url('products/' . $item->photo) }}"
+                                                        alt="Card image cap">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-muted">
+                                                            {{ app()->getLocale() == 'km' ? $item->product_name_km : $item->product_name }}
+                                                        </h5>
+                                                        <p class="card-text text-color-lhc">
+                                                            {{ "$" . number_format($item->salling_price, 2, '.', '.') }}
+                                                        </p>
+                                                    </div>
+                                                </a>
                                             </div>
-                                            </a>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                         <hr class="style4">
@@ -101,18 +110,21 @@
                     <hr class="style4">
                     <div class="row">
                         @foreach ($productes as $product)
-                        <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <a href="{{ url('/products/details', $product->id) }}">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <img src="{{ url('products/' . $product->photo) }}"
-                                            class="" width="100%">
-                                            <h5 class="card-title text-muted">{{ app()->getLocale() == "km" ? $product->product_name_km : $product->product_name }}</h5>
-                                            <p class="card-text text-color-lhc">{{"$" . number_format($product->salling_price, 2, ".", ".")  }}</p>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <img src="{{ url('products/' . $product->photo) }}" class=""
+                                                width="100%">
+                                            <h5 class="card-title text-muted">
+                                                {{ app()->getLocale() == 'km' ? $product->product_name_km : $product->product_name }}
+                                            </h5>
+                                            <p class="card-text text-color-lhc">
+                                                {{ "$" . number_format($product->salling_price, 2, '.', '.') }}</p>
+                                        </div>
                                     </div>
-                                </div>
                                 </a>
-                        </div>
+                            </div>
                         @endforeach
                     </div>
 

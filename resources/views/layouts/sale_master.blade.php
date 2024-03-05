@@ -45,12 +45,12 @@
                     <span class="brand-text">{{$profile->name}}</span>
                 </a>
                 @if (Request::path() != "sales-cart-list")
-                <a href="{{ url('/home') }}" class="nav-link text-muted">
-                    <i class="nav-icon fas fa-dashboard me-2"></i> {{ __('app.dashboard') }}
+                <a href="{{ url('/home') }}" class="nav-link text-muted" style="font-size: 1.1rem; color: #000000 !important;">
+                    <i class="nav-icon fas fa-th-large me-3"></i> {{ __('app.dashboard') }}
                 </a>
                 @else
-                <a href="{{ url('/sales') }}" class="nav-link">
-                    <p class=" text-muted"><i class="fas fa-arrow-left"></i> {{ __('app.btn_back') }}</p>
+                <a href="{{ url('/sales') }}" class="nav-link" style="font-size: 1.1rem; color: #000000 !important;">
+                    <p class=""><i class="fas fa-arrow-circle-left"></i> {{ __('app.btn_back') }}</p>
                 </a>
                 @endif
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">

@@ -39,7 +39,7 @@
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $item->fullname }}</td>
                                     <td>{{ $item->email }}</td>
-                                    <td><span class="badge badge-primary"><i class=" fas fa-phone-volume"></i> {{ $item->phone }}</span></td>
+                                    <td> <a href="tel:{{ $item->phone }}"><span class="badge badge-primary"><i class=" fas fa-phone-volume"></i>  {{ $item->phone }}</span></a> </td>
                                     <td>{{ $item->you_are = 1 ? __('app.label_guests'):__('app.label_agency') }}</td>
                                     <td>{!! $item->content !!}</td>
                                     <td>{{ $item->created_at }}</td>

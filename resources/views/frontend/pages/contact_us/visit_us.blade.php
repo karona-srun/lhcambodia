@@ -67,14 +67,11 @@
                     <h5>{{ __('app.contact_us_page') }}</h5>
                     <hr>
                     <div class="">
-                        @if (Session::has('success'))
-                            <div id="toastsContainerTopRight" class="toasts-top-right fixed">
-                                <div class="toast bg-primary fade show" role="alert" aria-live="assertive" aria-atomic="true">
-                                    <div class="toast-header">
-                                        <strong class="mr-auto">{{ __('app.label_confirm') }}</strong>
-                                    </div>
-                                    <div class="toast-body">{{ Session::get('success') }}</div>
-                                </div>
+                        @if (Session::has('contact'))
+                            <div class="alert alert-success alert-dismissible contact-alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h5><i class="icon fas fa-check"></i> {{ __('app.label_confirm') }}</h5>
+                                {{ Session::get('contact') }}
                             </div>
                         @endif
 
@@ -85,22 +82,22 @@
                                     <div class="col-sm-6">
 
                                         <div class="form-group">
-                                            <label>{{__('app.label_fullname')}}</label>
+                                            <label>{{ __('app.label_fullname') }}</label>
                                             <input type="text" name="fullname" class="form-control">
                                             @if ($errors->has('fullname'))
-                                            <div class="error text-danger text-sm mt-1">
-                                                {{ $errors->first('fullname') }}</div>
-                                        @endif
+                                                <div class="error text-danger text-sm mt-1">
+                                                    {{ $errors->first('fullname') }}</div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>{{__('app.label_email')}}</label>
+                                            <label>{{ __('app.label_email') }}</label>
                                             <input type="email" name="email" class="form-control">
                                             @if ($errors->has('email'))
-                                            <div class="error text-danger text-sm mt-1">
-                                                {{ $errors->first('email') }}</div>
-                                        @endif
+                                                <div class="error text-danger text-sm mt-1">
+                                                    {{ $errors->first('email') }}</div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -109,20 +106,20 @@
                                     <div class="col-sm-6">
 
                                         <div class="form-group">
-                                            <label>{{__('app.label_phone')}}</label>
+                                            <label>{{ __('app.label_phone') }}</label>
                                             <input type="text" class="form-control" name="phone">
                                             @if ($errors->has('phone'))
-                                            <div class="error text-danger text-sm mt-1">
-                                                {{ $errors->first('phone') }}</div>
-                                        @endif
+                                                <div class="error text-danger text-sm mt-1">
+                                                    {{ $errors->first('phone') }}</div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>{{ __('app.label_you_are')}}</label>
+                                            <label>{{ __('app.label_you_are') }}</label>
                                             <select name="you_are" id="" class="form-control select2s">
-                                                <option value="1">{{__('app.label_guests')}}</option>
-                                                <option value="2">{{__('app.label_agency')}}</option>
+                                                <option value="1">{{ __('app.label_guests') }}</option>
+                                                <option value="2">{{ __('app.label_agency') }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -132,12 +129,12 @@
                                     <div class="col-sm-12">
 
                                         <div class="form-group">
-                                            <label>{{__('app.content_page')}}</label>
+                                            <label>{{ __('app.content_page') }}</label>
                                             <textarea class="form-control" name="content" rows="6"></textarea>
                                             @if ($errors->has('content'))
-                                            <div class="error text-danger text-sm mt-1">
-                                                {{ $errors->first('content') }}</div>
-                                        @endif
+                                                <div class="error text-danger text-sm mt-1">
+                                                    {{ $errors->first('content') }}</div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -155,8 +152,11 @@
                 <div class="col-sm-12 clear-pl mt-4 m-2">
                     <h5 class="m-0 mb-2">{{ __('app.visit_us_page') }}</h5>
                     <div class="border p-1">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3909.090750245001!2d104.88372059999999!3d11.5453476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109510069a6b291%3A0xae330c7e42d0b3c0!2sLuxury%20Home!5e0!3m2!1skm!2skh!4v1705121194177!5m2!1skm!2skh" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3909.090750245001!2d104.88372059999999!3d11.5453476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109510069a6b291%3A0xae330c7e42d0b3c0!2sLuxury%20Home!5e0!3m2!1skm!2skh!4v1705121194177!5m2!1skm!2skh"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
                 </div>
             </div>
         </div>

@@ -12,11 +12,11 @@
                     <div class="card-header">
                         <h3 class="card-title">{{ __('app.staff_info') }}</h3>
                         <div class="card-tools">
-                            <button type="submit" class="btn utline-primary" id="btn-save"> <i class="fas fa-save"></i>
+                            <button type="submit" class="btn btn-outline-primary" id="btn-save"> <i class="fas fa-save"></i>
                                 {{ __('app.btn_save') }}</button>
-                            <a type="button" class="btn utline-primary" id="btn-edit"> <i class=" fas fa-edit"></i>
+                            <a type="button" class="btn btn-outline-primary" id="btn-edit"> <i class=" fas fa-edit"></i>
                                     {{ __('app.btn_edit') }} </a>
-                            <a href="{{ url('staff-info') }}" class="btn rimary"> <i class=" fas fa-list"></i>
+                            <a href="{{ url('staff-info') }}" class="btn btn-primary"> <i class=" fas fa-list"></i>
                                 {{ __('app.label_list') }} </a>
                         </div>
                     </div>

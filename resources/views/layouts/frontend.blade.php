@@ -163,6 +163,109 @@
             display: block;
             transition: opacity .2s;
         }
+
+        /* Float button */
+        .fab-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            user-select: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+        }
+
+        .fab-container:hover {
+            height: 100%;
+        }
+
+        .fab-container:hover .sub-button:nth-child(2) {
+            transform: translateY(-80px);
+        }
+
+        .fab-container:hover .sub-button:nth-child(3) {
+            transform: translateY(-140px);
+        }
+
+        .fab-container:hover .sub-button:nth-child(4) {
+            transform: translateY(-200px);
+        }
+
+        .fab-container:hover .sub-button:nth-child(5) {
+            transform: translateY(-260px);
+        }
+
+        .fab-container:hover .sub-button:nth-child(6) {
+            transform: translateY(-320px);
+        }
+
+        .fab-container .fab {
+            position: relative;
+            height: 65px;
+            width: 65px;
+            background-color: #f58f5a;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .fab-container .fab::before {
+            content: " ";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 30px;
+            width: 30px;
+            background-color: inherit;
+            border-radius: 0 0 5px 0;
+            z-index: -1;
+        }
+
+        .fab-container .fab .fab-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+        }
+
+        .fab-container .fab .fab-content .material-icons {
+            color: white;
+            font-size: 48px;
+        }
+
+        .fab-container .sub-button {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            bottom: 10px;
+            right: 5px;
+            height: 50px;
+            width: 50px;
+            background-color: #f58f5a;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .fab-container .sub-button:hover {
+            cursor: pointer;
+        }
+
+        .fab-container .sub-button .material-icons {
+            color: white;
+            padding-top: 6px;
+        }
+
+        .fab-container .fas {
+            color: white;
+            font-size: 1.7rem;
+        }
+        .fab-container .sub-button .fas {
+            color: white;
+            font-size: 1.4rem;
+        }
     </style>
 </head>
 
@@ -401,6 +504,31 @@
             </div>
             @yield('content')
         </div>
+        {{-- Float button --}}
+        
+        <div class="fab-container">
+            <div class="fab shadow">
+                <div class="fab-content">
+                    <i class="text-white fas fa-headset"></i>
+                </div>
+            </div>
+            <div class="sub-button shadow">
+                <a href="{{ 'tel:' . $profile->tel }}">
+                    <i class="text-white fas fa-phone-volume"></i>
+                </a>
+            </div>
+            <div class="sub-button shadow">
+                <a href="google.com" target="_blank">
+                    <i class="fas fa-envelope-open-text"></i>
+                </a>
+            </div>
+            <div class="sub-button shadow">
+                <a href="google.com" target="_blank">
+                    <i class="fas fa-question-circle"></i>
+                </a>
+            </div>
+        </div>
+        {{-- End Float button --}}
         <footer class="main-footer bg-gray">
             @include('frontend.footer')
         </footer>
@@ -412,6 +540,10 @@
     @yield('js')
     <script>
         $(document).ready(function() {
+
+            $('.contact-alert').delay(5000).fadeOut('slow');
+
+
             $('.dropdown').hover(function() {
                 $(this).addClass('show');
                 $(this).find('.dropdown-menu').addClass('show');
@@ -437,15 +569,13 @@
                         let original = document.querySelector('#img-1'),
                             magnified = document.querySelector('#img-2'),
                             style = magnified.style,
-                            x = e.pageX - 320,
-                            y = e.pageY - 320,
+                            x = e.pageX - 600,
+                            y = e.pageY - 350,
                             imgWidth = original.offsetWidth,
                             imgHeight = original.offsetHeight,
-                            xperc = ((x / imgWidth) * 100),
-                            yperc = ((y / imgHeight) * 100);
+                            xperc = ((x / imgWidth) * 250),
+                            yperc = ((y / imgHeight) * 250);
 
-
-                        console.log(e.pageX+'---'+this.offsetLeft)
                         //lets user scroll past right edge of image
                         if (x > (.01 * imgWidth)) {
                             xperc += (.15 * xperc);

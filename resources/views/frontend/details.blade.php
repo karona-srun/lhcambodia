@@ -35,14 +35,14 @@
                             <hr>
                             <a href="{{ url('/') }}"
                                 class="btn btn-block btn-light text-sm-left">{{ __('app.label_all') }}</a>
-                                @foreach ($productCategory as $menu_item)
-                                <a href="#"
-                                    class="btn btn-block btn-light text-color-lhc text-sm-left"><i class="fas fa-angle-double-right me-3"></i> {{ app()->getLocale() == 'en' ? $menu_item->name : $menu_item->name_km }}</a>
-                                    @foreach ($menu_item->subCategory as $submenu)
-                                    <a href="{{ url('/decor-product/'.strtolower(str_replace(' ','-',$menu_item->name)).'/'.strtolower(str_replace(' ','-',$submenu->name)),$submenu->id) }}"
-                                        class="btn btn-block {{ request()->id == $submenu->id ? 'btn-lhc' : 'btn-light' }} text-sm-left pl-4">{{ app()->getLocale() == 'en' ? $submenu->name : $submenu->name_km }}</a>
-    
-                                    @endforeach
+                            @foreach ($productCategory as $menu_item)
+                                <a href="#" class="btn btn-block btn-light text-color-lhc text-sm-left"><i
+                                        class="fas fa-angle-double-right me-3"></i>
+                                    {{ app()->getLocale() == 'en' ? $menu_item->name : $menu_item->name_km }}</a>
+                                @foreach ($menu_item->subCategory as $submenu)
+                                    <a href="{{ url('/decor-product/' . strtolower(str_replace(' ', '-', $menu_item->name)) . '/' . strtolower(str_replace(' ', '-', $submenu->name)), $submenu->id) }}"
+                                        class="btn btn-block {{ request()->id == $submenu->id ? 'btn-lhc text-white' : 'btn-light' }} text-sm-left pl-4">{{ app()->getLocale() == 'en' ? $submenu->name : $submenu->name_km }}</a>
+                                @endforeach
                             @endforeach
                         </div>
                     </div>
@@ -58,9 +58,10 @@
                                         <div class="col-12 col-sm-6">
                                             <div class="col-12">
                                                 <div id="img-zoomer-box">
-                                                    <img src="{{ '/products/' . $product->photo }}" id="img-1" class="product-image" alt="Zoom Image on Mouseover"/>
+                                                    <img src="{{ '/products/' . $product->photo }}" id="img-1"
+                                                        class="product-image" alt="Zoom Image on Mouseover" />
                                                     <div id="img-2"></div>
-                                                </div> 
+                                                </div>
                                             </div>
                                             <div class="col-12 product-image-thumbs">
                                                 <div class="product-image-thumb"><img
@@ -91,10 +92,10 @@
                                                 </label>
                                             </div>
                                             <div class="mt-4">
-                                                <a href="{{ url('/products/add-cart', $product->id) }}"
+                                                <a href="{{ url('/products/details/add-cart', $product->id) }}"
                                                     class="btn btn-lhc btn-flat">
-                                                    <i class="fas fa-cart-plus mr-2"></i>
-                                                    <span
+                                                    <i class="fas fa-cart-plus text-white mr-2"></i>
+                                                    <span class="text-white"
                                                         style="font-family: 'Khmer' !important;">{{ __('app.label_add_cart') }}</span>
                                                 </a>
                                             </div>
@@ -130,7 +131,6 @@
                     <div class="row">
                         @foreach ($productes as $product)
                             <div class="col-lg-2">
-
                                 <div class="card-hover">
                                     <a href="{{ url('/products/details', $product->id) }}">
                                         <div class="card-body">
