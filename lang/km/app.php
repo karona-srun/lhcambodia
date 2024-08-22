@@ -54,6 +54,7 @@ return [
     'attendance' => 'ស្រង់វត្តមាន',
     'payroll' => 'បើកប្រាក់ខែ',
     'sales' => 'ការលក់',
+    'label_sale_order' => 'ការបញ្ជាលក់',
     'sales_order' => 'ការបញ្ជាលក់',
         'customer_name' => 'ឈ្មោះអតិថិជន',
         'sale_order' => 'បញ្ជាទិញលក់#',

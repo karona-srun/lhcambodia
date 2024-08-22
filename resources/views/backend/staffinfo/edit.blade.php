@@ -205,7 +205,7 @@
                                                     style="width: 100%;">
                                                     @foreach ($baseSalary as $item)
                                                         <option value="0" selected="selected">
-                                                            {{ $item->name }} : {{ $item->amount }}$</option>
+                                                            {{ $item->name }} : {{ $item->amount }}៛</option>
                                                     @endforeach
                                                 </select>
                                                 @if ($errors->has('base_salary'))

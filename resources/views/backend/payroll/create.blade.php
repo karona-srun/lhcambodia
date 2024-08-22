@@ -73,7 +73,6 @@
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="col-sm-3 div-toggle">
                                 <div class="form-group">
                                     <label>{{ __('app.table_status') }} <small class="text-red">*</small></label>
@@ -117,7 +116,6 @@
                         <p class="mt-3">ប្រាក់ខែ​៖​ $<span class="total_salary"></span> </p>
                         <input type="hidden" name="total_salary" class="total_salary_">
                     </div>
-
                 </form>
             </div>
         </div>

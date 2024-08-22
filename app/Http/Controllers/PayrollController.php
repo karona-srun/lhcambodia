@@ -144,6 +144,32 @@ class PayrollController extends Controller
         return view('backend.payroll.show', compact('data', 'staff', 'payroll'));
     }
 
+    public function print($id)
+    {
+        $payroll = Payroll::find($id);
+        $staff = StaffInfo::find($payroll->staff_id);
+
+        $startDate = $payroll->start_date;
+        $endDate = $payroll->end_date;
+
+        $data = Attendance::orderBy('date', 'desc')
+            ->where('staff_id', $payroll->staff_id)
+            ->whereBetween('date', [$startDate, $endDate])
+            ->get();
+
+        foreach ($data as $i => $value) {
+            $data[$i]['staff_id'] = $value->staff->full_name_kh;
+            $data[$i]['check_in'] = $value->check_in ?? '';
+            $data[$i]['check_out'] = $value->check_out ?? '';
+            $data[$i]['num_hour'] = $value->num_hour ?? '';
+            $data[$i]['note'] = $value->note ?? '';
+            $data[$i]['total_num_hour'] = (int) $value->sumAttendance($value->staff->id);
+            $data[$i]['total_salary'] = bcadd($value->sumAttendance($value->staff->id) * $staff->rate_per_hour, '0', 2);
+        }
+
+        return view('backend.payroll.print', compact('data', 'staff', 'payroll'));
+    }
+
     public function summary($id)
     {
         $payroll = Payroll::find($id);

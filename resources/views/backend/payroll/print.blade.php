@@ -1,11 +1,13 @@
-@extends('layouts.master')
-
-@section('title-page', __('app.payroll'))
-
-@section('css')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Payslip</title>
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.css') }}">
-    {{-- <style type="text/css"> --}}
+    
     <style media="screen">
         .noPrint {
             display: block;
@@ -21,7 +23,7 @@
             padding: 10px 10px !important;
         }
     </style>
-    <style media="print">
+    <style>
         .noPrint {
             display: none;
         }
@@ -54,25 +56,17 @@
             table {
                 border: 0px !important;
             }
-            .table .bg-blue {
+            .table, .bg-blue {
                 background-color: #007bff !important;
             }
         }
     </style>
-@endsection
-@section('content')
+</head>
+<body>
+
     <div class="row">
         <div class="col-md-12">
             <div class="card card-outline card-primary">
-                <div class="card-header">
-                    <div class="card-tools">
-                        <a href="{{ url('payroll/summary', $payroll->id )}}" class="btn  btn-outline-primary"> <i class="fas fa-print"></i>
-                            {{ __('app.label_summary') }} </a>
-                        <a href="{{ url('payroll/print', $payroll->id )}}" class="btn  btn-outline-primary"> <i class="fas fa-print"></i>
-                            {{ __('app.btn_print') }} </a>
-                        <a href="{{ url('payroll') }}" class="btn  btn-primary"> <i class=" fas fa-list"></i>
-                            {{ __('app.label_list') }} </a>
-                </div>
 
                 <div class="card-body" id="printarea">
                     <div class="card-body">
@@ -294,9 +288,8 @@
             </div>
         </div>
     </div>
-@endsection
 
-@section('js')
+    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript">
         $(function() {
             $.ajaxSetup({
@@ -304,9 +297,9 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $(".btn-print").click(function() {
-                window.print();
-            });
+            window.print();
         });
     </script>
-@endsection
+    
+</body>
+</html>

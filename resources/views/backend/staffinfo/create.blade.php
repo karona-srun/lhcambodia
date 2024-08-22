@@ -11,9 +11,9 @@
                     <div class="card-header">
                         <h3 class="card-title">{{ __('app.label_info') }}{{ __('app.staff_info') }}</h3>
                         <div class="card-tools">
-                            <button type="submit" class="btn utline-primary "> <i "fas fa-save"></i>
+                            <button type="submit" class="btn btn-outline-primary "> <i class="fas fa-save"></i>
                                 {{ __('app.btn_save') }}</button>
-                            <a href="{{ url('staff-info') }}" class="btn rimary "> <i " fas fa-list"></i>
+                            <a href="{{ url('staff-info') }}" class="btn btn-primary "> <i class=" fas fa-list"></i>
                                 {{ __('app.label_list') }} </a>
                         </div>
                     </div>
@@ -226,7 +226,7 @@
                                                         class="text-red">*</small></label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text">$</span>
+                                                        <span class="input-group-text">៛</span>
                                                     </div>
                                                     <input type="number" class="form-control" step="any" name="base_salary"
                                                     placeholder="{{ __('app.label_required') }}{{ __('app.base_salary') }}">
@@ -243,7 +243,7 @@
                                                         class="text-red">*</small></label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text">$</span>
+                                                        <span class="input-group-text">៛</span>
                                                     </div>
                                                     <input type="number" class="form-control" step="any" name="rate_per_hour"
                                                     placeholder="{{ __('app.label_required') }}{{ __('app.rate_per_hour') }}">

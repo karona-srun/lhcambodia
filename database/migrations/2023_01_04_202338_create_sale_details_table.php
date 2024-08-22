@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('product_code');
             $table->string('product_name');
             $table->string('scale');
-            $table->tinyInteger('qty');
+            $table->decimal('qty',8,0);
             $table->decimal('price',8,2);
             $table->string('note')->nullable();
             $table->timestamps();

@@ -418,7 +418,7 @@
                                 <a href="{{ url('sale-report') }}" class="nav-link">
                                     <i class="nav-icon fas fa-file-invoice"></i>
                                     <p>
-                                        {{ __('app.label_invoice') }}
+                                        {{ __('app.label_sale_order') }}
                                     </p>
                                 </a>
                             </li>

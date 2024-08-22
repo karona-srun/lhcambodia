@@ -55,6 +55,7 @@ return [
     'attendance' => 'Attendance',
     'payroll' => 'Payroll',
     'sales' => 'Sale',
+    'label_sale_order' => 'Sales Order',
     'sales_order' => 'Sales Order',
         'customer_name' => 'Customer Name',
         'sale_order' => 'Sales Order#',

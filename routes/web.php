@@ -124,6 +124,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/attendances-exportexcel', [App\Http\Controllers\AttendanceController::class, 'exportExcel']);
 
     Route::resource('/payroll', PayrollController::class);
+    Route::get('payroll/print/{id}',[App\Http\Controllers\PayrollController::class, 'print']);
     Route::get('payroll/summary/{id}',[App\Http\Controllers\PayrollController::class, 'summary']);
 
     Route::resource('/revenue', IncomeController::class);

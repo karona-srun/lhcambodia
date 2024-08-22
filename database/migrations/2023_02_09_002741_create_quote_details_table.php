@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('quotes_id');
             $table->string('product_id');
-            $table->tinyInteger('qty');
+            $table->decimal('qty',8,0);
             $table->decimal('amount',8,2);
             $table->string('unit');
             $table->decimal('total_amount',8,2);

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('sale_no')->nullable();
             $table->bigInteger('customer_id')->nullable();
-            $table->tinyInteger('total_qty');
+            $table->decimal('total_qty',8,0);
             $table->decimal('total_price',8,2);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
