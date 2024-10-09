@@ -16,6 +16,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Helpers\Helpers;
 use App\Http\Resources\ListStaffResource;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Client;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class AttendanceController extends Controller
 {
@@ -89,7 +91,7 @@ class AttendanceController extends Controller
             __('app.num_hour'),
             __('app.label_note')
         ];
-        
+
         return Helpers::exportExcel($datas,$heading,$file_name);
         //Excel::download(new ExportFiles($datas,$heading,$file_name),$file_name);
     }
@@ -104,6 +106,94 @@ class AttendanceController extends Controller
     {
         $data = StaffResource::collection(StaffInfo::orderBy('id', 'desc')->get());
         return response()->json($data);
+    }
+
+    public function scanQRCode()
+    {
+        $staffinfo = StaffInfo::orderBy('id','desc')->get();
+        return view('backend.attendances.scanqrcode', compact('staffinfo'));
+    }
+
+    public function submitScanQRCode(Request $request)
+    {
+        $date = Carbon::now('Asia/Phnom_Penh')->toDateString();
+        $time = Carbon::now('Asia/Phnom_Penh')->toTimeString();
+        $attendance = Attendance::where(['date'=>$date,'staff_id'=>$request->staff])->first();
+        if($attendance){
+
+            if($request->type == 1){
+                $fixedTime = Carbon::createFromTimeString($attendance->check_in, 'Asia/Phnom_Penh');
+                $currentTime = Carbon::now('Asia/Phnom_Penh');
+                $timeDifferenceInMinutes = $fixedTime->diffInMinutes($currentTime, false);
+                $attendance->num_hour = abs($timeDifferenceInMinutes)/60;
+                $attendance->check_out = $time;
+                $attendance->note = $request->note;
+                $attendance->updated_by = $request->staff;
+                $attendance->save();
+            }elseif($request->type == 0){
+                $fixedTime = Carbon::createFromTimeString($attendance->check_out, 'Asia/Phnom_Penh');
+                $currentTime = Carbon::now('Asia/Phnom_Penh');
+                $timeDifferenceInMinutes = $fixedTime->diffInMinutes($currentTime, false);
+                $attendance->num_hour = abs($timeDifferenceInMinutes)/60;
+                $attendance->check_in = $time;
+                $attendance->note = $request->note;
+                $attendance->updated_by = $request->staff;
+                $attendance->save();
+            }
+        }else{
+            $attendance = new Attendance();
+            $attendance->staff_id = $request->staff;
+            $attendance->date = $date;
+            $attendance->status = $request->type;
+            $attendance->check_in = $request->type == 0 ? $time : '';
+            $attendance->check_out = $request->type == 1 ? $time : '';
+            $attendance->note = $request->note;
+            $attendance->created_by = $request->staff;
+            $attendance->updated_by = $request->staff;
+            $attendance->save();
+        }
+        $data = [
+            'result' => __('app.attendance') . __('app.label_created_successfully'),
+            'staff' => '* STAFF : '.$attendance->staff->first_name.' '.$attendance->staff->last_name,
+            'type' =>  $request->type == 0 ? '* TYPE   : CHECK IN':'* TYPE   : CHECK OUT',
+            'date' =>  '* DATE   : '.$date,
+            'time' =>  '* TIME   : '.$time,
+        ];
+
+        $staff_name =  $attendance->staff->full_name_kh." ".$attendance->staff->full_name;
+        $datas = "✅ Attendance has been successfully!" . "\n" .
+                 "-------------------------------------\n".
+         "* STAFF : " . $staff_name . "\n" .
+         "* TYPE  : " . ($request->type == 0 ? "⬇️ CHECK IN" : "⬆️ CHECK OUT") . "\n" .
+         "* DATE  : " . $date . "\n" .
+         "* TIME  : " . $time . "\n";
+
+        $this->getUpdates($datas);
+        return back()->with('success', $data);
+    }
+
+    public function getUpdates($data)
+    {
+        $chatId = "";
+        $myToken = env('TELEGRAM_BOT_TOKEN', '7872392004:AAHIVWl-qKqI_9D6ZzWqSP7-KK3WqXiKP18');
+        Telegram::setAccessToken($myToken);
+        $datas = Telegram::getUpdates();
+        if (isset($datas[0]) && !empty($datas[0])) {
+            foreach ($datas[0]['message'] as $update) {
+                $chatId = $datas[0]['message']['chat']['id'];
+            }
+        }
+
+        $client = new Client();
+
+        $response = $client->post('https://api.telegram.org/bot' . $myToken . '/sendMessage', [
+            'form_params' => [
+                'chat_id' => $chatId,
+                'text' => $data,
+            ]
+        ]);
+
+        return json_decode($response->getBody(), true);
     }
 
     public function filterAttendances(Request $request)

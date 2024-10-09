@@ -226,7 +226,7 @@
                                                         class="text-red">*</small></label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text">៛</span>
+                                                        <span class="input-group-text">$</span>
                                                     </div>
                                                     <input type="number" class="form-control" step="any" name="base_salary"
                                                     placeholder="{{ __('app.label_required') }}{{ __('app.base_salary') }}">
@@ -243,7 +243,7 @@
                                                         class="text-red">*</small></label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text">៛</span>
+                                                        <span class="input-group-text">$</span>
                                                     </div>
                                                     <input type="number" class="form-control" step="any" name="rate_per_hour"
                                                     placeholder="{{ __('app.label_required') }}{{ __('app.rate_per_hour') }}">

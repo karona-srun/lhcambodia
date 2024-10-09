@@ -21,7 +21,7 @@
                                 <a href="#" class="btn btn-warning btn-edit"> <i
                                         class=" fas fa-edit"></i>
                                     {{ __('app.btn_edit') }}</a>
-                                <a href="#" class="btn btn-danger btn-cancel"> 
+                                <a href="#" class="btn btn-danger btn-cancel">
                                     <i class="far fa-times-circle"></i>
                                     {{ __('app.btn_cancel') }}</a>
                             @endcan
@@ -79,7 +79,7 @@
                                             <label>{{ __('app.label_term_and_conditions_invoice') }} {{__('app.label_invoice')}}</label>
                                             <textarea id="summernote" name="descrip_contract_invoice">
                                                 {{ $profile->descrip_contract_invoice }}
-                                            </textarea>                                
+                                            </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                             <label>{{ __('app.label_term_and_conditions_quote') }} {{__('app.label_quote')}}</label>
                                             <textarea id="summernote_quote" name="descrip_contract_quote">
                                                 {{ $profile->descrip_contract_quote }}
-                                            </textarea>                                
+                                            </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                             <label>{{__('app.label_introduct')}}</label>
                                             <textarea id="summernote" class="summernote" name="introduct">
                                                 {{ $profile->introduct }}
-                                            </textarea>                                
+                                            </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                             <label>{{__('app.label_introduct_km')}}</label>
                                             <textarea id="summernote" class="summernote" name="introduct_km">
                                                 {{ $profile->introduct_km }}
-                                            </textarea>                                
+                                            </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -133,8 +133,8 @@
 
             $('.btn-edit').click( function() {
                 $('.btn-save').toggle();
-                $('.btn-edit').toggle(); 
-                $('.btn-cancel').toggle(); 
+                $('.btn-edit').toggle();
+                $('.btn-cancel').toggle();
                 $('.system-profile *').prop('disabled', false);
                 $('#summernote').summernote('enable');
                 $('#summernote_quote').summernote('enable');
@@ -142,8 +142,8 @@
 
             $('.btn-cancel').click( function() {
                 $('.btn-save').toggle();
-                $('.btn-edit').toggle(); 
-                $('.btn-cancel').toggle(); 
+                $('.btn-edit').toggle();
+                $('.btn-cancel').toggle();
                 $('.system-profile *').prop('disabled', true);
                 $('#summernote').summernote('disable');
                 $('#summernote_quote').summernote('disable');
@@ -164,7 +164,7 @@
                 ]
             })
 
-            
+
             $('#summernote_quote').summernote({
                 height: 200,
                 placeholder: 'សរសេរពិពណ៌នាកិច្ចសន្យា',

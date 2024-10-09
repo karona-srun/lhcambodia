@@ -87,8 +87,8 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="#" role="button" style="color: #000;">
-                        <i class="far fa-calendar-alt"></i><small id="date" style="font-size: 1.05rem;"></small>
-                        <i class="far fa-clock"></i><small id="time" style="font-size: 1.05rem;"></small>
+                        <i class="far fa-calendar-alt"></i><small id="date" style="font-size: 0.9rem;"></small>
+                        <i class="far fa-clock"></i><small id="time" style="font-size: 0.9rem;"></small>
                     </a>
                 </li>
                 <li class="nav-item dropdown">
@@ -117,7 +117,7 @@
                                         class="img-size-32 mr-3 img-circle">
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title text-sm mt-1">
-                                            
+
                                             {{ __('app.label_received_notification') }} <br>
                                             <span class="float-right text-sm"><i class="far fa-clock"></i>
                                                 {{ $notification->created_at->diffForHumans() }}</span>

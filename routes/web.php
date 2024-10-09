@@ -62,6 +62,9 @@ Route::get('/products-list', [App\Http\Controllers\WelcomeController::class, 'pr
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 Route::get('/decor-product/{slug1}/{slug2}/{id}',  [App\Http\Controllers\WelcomeController::class,'decorProductFilterCategory']);
 
+Route::get('attendances/scan/qrcode', [App\Http\Controllers\AttendanceController::class, 'scanQRCode']);
+Route::post('attendances/scan/qrcode', [App\Http\Controllers\AttendanceController::class, 'submitScanQRCode']);
+
 Route::group(['prefix' => 'admin'], function () {
     Auth::routes(['register' => false]);
 });
@@ -151,7 +154,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/get-products', [App\Http\Controllers\ProductController::class, 'getAllProducts']);
     Route::get('/import-product', [App\Http\Controllers\ProductController::class, 'importExcelForm']);
     Route::post('/import-product', [App\Http\Controllers\ProductController::class, 'importExcel']);
-    
+
     Route::resource('item-category', ItemCategoryController::class);
     Route::resource('item-sub-category', ItemSubCategoryController::class);
     Route::resource('itemes', ItemController::class);

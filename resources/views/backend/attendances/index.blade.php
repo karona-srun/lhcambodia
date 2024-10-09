@@ -118,21 +118,24 @@
                                 <th>{{ __('app.table_no') }}</th>
                                 <th>{{ __('app.table_staff_name') }}</th>
                                 <th>{{ __('app.table_date') }}</th>
-                                <th>{{ __('app.table_status') }}</th>
-                                <th>{{ __('app.table_checkin') }}</th>
-                                <th>{{ __('app.table_checkout') }}</th>
+                                {{-- <th>{{ __('app.table_status') }}</th> --}}
+                                <th>{{ __('app.table_checkin') .' & '. __('app.table_checkout') }}</th>
                                 <th>{{ __('app.num_hour') }}</th>
                                 <th>{{ __('app.label_note') }}</th>
                                 <th>{{ __('app.table_action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($attendances as $i => $item)
+                            @php
+                                $preStaff = null;
+                            @endphp
+                        @foreach ($attendances as $i => $item)
+
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $item->staff->full_name_kh }}</td>
-                                    <td>{{ $item->date }}</td>
-                                    <td>
+                                    <td >{{ $item->date }}</td>
+                                    {{-- <td>
                                         @if ($item->status == 'presence')
                                             <span class="text-sm badge badge-success">{{ __('app.label_presence') }}</span>
                                         @elseif($item->status == 'adsent')
@@ -142,10 +145,17 @@
                                             <span
                                                 class="text-sm badge badge-danger">{{ __('app.label_permission_request') }}</span>
                                         @endif
-                                    </td>
-                                    <td>{{ $item->check_in }}</td>
-                                    <td>{{ $item->check_out }}</td>
-                                    <td>{{ $item->num_hour }}</td>
+                                        @if ($item->status == 0)
+                                            <span class="text-sm badge badge-success">CHECK-IN</span>
+                                        @elseif ($item->status == 1)
+                                            <span
+                                                class="text-sm badge badge-secondary">CHECK-OUT</span>
+                                                @endif
+                                    </td> --}}
+
+                                    <td><span class="text-sm badge badge-success">{{ "IN ".$item->check_in }}</span><br> <span class="text-sm badge badge-success">{{ "OUT ".$item->check_out}}</span></td>
+
+                                    <td>{{ number_format($item->num_hour,2) }}</td>
                                     <td>{{ $item->note }}</td>
                                     <td>
                                         @can('Attandance Edit')
@@ -160,6 +170,9 @@
                                         @endcan
                                     </td>
                                 </tr>
+                                @php
+                                    $preStaff = $item->staff->id;
+                                @endphp
                             @endforeach
                         </tbody>
                     </table>
